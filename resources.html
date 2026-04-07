@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resources — CareerCompass</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <style>
+        /* ─── THEME TOKENS ─── */
+        [data-theme="dark"] {
+            --bg: #0a0d14;
+            --surface: #111520;
+            --card: #161b2e;
+            --border: #1e2640;
+            --accent: #3d7fff;
+            --accent2: #00e5b0;
+            --accent3: #ff6b35;
+            --text: #c8cce0;
+            --muted: #6b7394;
+            --heading: #ffffff;
+            --nav-bg: rgba(10, 13, 20, 0.88);
+            --toggle-bg: #1e2640;
+            --shadow: rgba(0, 0, 0, 0.5);
+        }
+        [data-theme="light"] {
+            --bg: #f5f6fa;
+            --surface: #eceef6;
+            --card: #ffffff;
+            --border: #dde0ef;
+            --accent: #2563eb;
+            --accent2: #059669;
+            --accent3: #ea580c;
+            --text: #374151;
+            --muted: #6b7280;
+            --heading: #111827;
+            --nav-bg: rgba(245, 246, 250, 0.92);
+            --toggle-bg: #dde0ef;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Space Grotesk', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; transition: background 0.35s, color 0.35s; }
+
+        /* ─── NAV ─── */
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1rem 5vw; background: var(--nav-bg); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+        .nav-logo { font-family: 'Space Mono', monospace; font-weight: 700; font-size: 1.2rem; color: var(--heading); letter-spacing: -0.5px; text-decoration: none;}
+        .nav-logo span { color: var(--accent); }
+        .nav-center { display: flex; gap: 2rem; list-style: none; }
+        .nav-center a { font-family: 'Space Mono', monospace; font-size: 0.78rem; font-weight: 400; color: var(--muted); text-decoration: none; letter-spacing: 0.3px; transition: color 0.2s; }
+        .nav-center a:hover, .nav-center a.active { color: var(--accent); }
+        .nav-right { display: flex; align-items: center; gap: 0.9rem; }
+        
+        .theme-toggle { width: 44px; height: 24px; background: var(--toggle-bg); border: 1px solid var(--border); border-radius: 100px; cursor: pointer; display: flex; align-items: center; padding: 3px; position: relative; }
+        .toggle-knob { width: 18px; height: 18px; border-radius: 50%; background: var(--accent); transition: transform 0.3s; display: flex; align-items: center; justify-content: center; font-size: 10px; }
+        [data-theme="light"] .toggle-knob { transform: translateX(20px); }
+        .nav-cta { background: var(--accent); color: #fff; text-decoration:none; padding: 0.5rem 1.2rem; border-radius: 6px; font-family: 'Space Mono', monospace; font-size: 0.75rem; }
+
+        /* ─── PAGE HEADER ─── */
+        .page-header { padding: 7.5rem 5vw 3rem; text-align: center; position: relative; overflow: hidden; }
+        .page-header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 50px 50px; mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%); opacity: 0.35; }
+        .page-label { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent3); margin-bottom: 0.9rem; position: relative; z-index: 2; }
+        .page-title { font-family: 'Space Mono', monospace; font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 700; color: var(--heading); letter-spacing: -1px; line-height: 1.1; margin-bottom: 1rem; position: relative; z-index: 2; }
+        .page-sub { font-size: 1rem; color: var(--muted); max-width: 500px; margin: 0 auto 2.5rem; line-height: 1.7; position: relative; z-index: 2; }
+
+        /* ─── MAIN CONTENT ─── */
+        .main-wrap { max-width: 1000px; margin: 0 auto; padding: 2rem 5vw 5rem; }
+        .res-section { margin-bottom: 3rem; }
+        .res-title { font-family: 'Space Mono', monospace; font-size: 1.2rem; font-weight: 700; color: var(--heading); margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;}
+        
+        .r-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+        .r-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; display: flex; gap: 1rem; align-items: flex-start; text-decoration: none; transition: all 0.2s; }
+        .r-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 10px 25px var(--shadow); }
+        .r-icon { font-size: 2rem; background: var(--surface); width: 60px; height: 60px; display:flex; align-items:center; justify-content:center; border-radius: 12px; flex-shrink: 0;}
+        .r-content { flex: 1; }
+        .r-name { font-family: 'Space Mono', monospace; font-weight: 700; color: var(--heading); font-size: 0.95rem; margin-bottom: 0.4rem; }
+        .r-desc { color: var(--muted); font-size: 0.82rem; line-height: 1.5; }
+
+        @media(max-width: 768px) { .nav-center { display: none; } }
+    </style>
+    <script>
+        // Persistent Theme Logic
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            }
+        })();
+    </script>
+</head>
+
+<body>
+    <!-- NAV -->
+    <nav>
+        <a href="home.html" class="nav-logo" style="text-decoration:none">Career<span>Compass</span></a>
+        <ul class="nav-center">
+            <li><a href="home.html#features">Features</a></li>
+            <li><a href="careerpath.html">Career Paths</a></li>
+            <li><a href="home.html#how">How It Works</a></li>
+            <li><a href="resources.html" class="active">Resources</a></li>
+            <li><a href="placement.html">Placement</a></li>
+        </ul>
+        <div class="nav-right">
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                <div class="toggle-knob" id="toggle-knob">☀️</div>
+            </button>
+            <a href="careerpath.html" class="nav-cta" style="text-decoration:none">Get Started →</a>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <div class="page-header">
+        <div class="page-label">Library</div>
+        <h1 class="page-title">Curated <span style="color:var(--accent3)">Resources</span></h1>
+        <p class="page-sub">The best free tools, platforms, and materials to supercharge your engineering preparation.</p>
+    </div>
+
+    <!-- MAIN -->
+    <div class="main-wrap">
+        
+        <div class="res-section">
+            <h2 class="res-title">Coding & Problem Solving</h2>
+            <div class="r-grid">
+                <a href="https://leetcode.com/" target="_blank" class="r-card">
+                    <div class="r-icon">🧑‍💻</div>
+                    <div class="r-content">
+                        <div class="r-name">LeetCode</div>
+                        <div class="r-desc">The gold standard for Data Structures and Algorithms interview prep. Includes mock tests and contest features.</div>
+                    </div>
+                </a>
+                <a href="https://codeforces.com/" target="_blank" class="r-card">
+                    <div class="r-icon">🏆</div>
+                    <div class="r-content">
+                        <div class="r-name">Codeforces</div>
+                        <div class="r-desc">Platform for competitive programming. Best for improving logic speed and edge case thinking.</div>
+                    </div>
+                </a>
+                <a href="https://takeuforward.org/" target="_blank" class="r-card">
+                    <div class="r-icon">📘</div>
+                    <div class="r-content">
+                        <div class="r-name">Striver's A2Z DSA</div>
+                        <div class="r-desc">Structured, step-by-step roadmap to master DSA from scratch to advanced level.</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="res-section">
+            <h2 class="res-title">Artificial Intelligence & Data</h2>
+            <div class="r-grid">
+                <a href="https://course.fast.ai/" target="_blank" class="r-card">
+                    <div class="r-icon">🧠</div>
+                    <div class="r-content">
+                        <div class="r-name">Fast.ai</div>
+                        <div class="r-desc">Making neural nets uncool again. The best practical top-down approach to Deep Learning.</div>
+                    </div>
+                </a>
+                <a href="https://www.kaggle.com/learn" target="_blank" class="r-card">
+                    <div class="r-icon">📊</div>
+                    <div class="r-content">
+                        <div class="r-name">Kaggle Learn</div>
+                        <div class="r-desc">Bite-sized micro courses on Pandas, Machine Learning, and handling datasets effectively.</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="res-section">
+            <h2 class="res-title">DevOps & Cybersecurity</h2>
+            <div class="r-grid">
+                <a href="https://roadmap.sh/devops" target="_blank" class="r-card">
+                    <div class="r-icon">☁️</div>
+                    <div class="r-content">
+                        <div class="r-name">roadmap.sh (DevOps)</div>
+                        <div class="r-desc">The absolute best visual roadmap connecting all the tools needed to master DevOps and Cloud architecture.</div>
+                    </div>
+                </a>
+                <a href="https://tryhackme.com/" target="_blank" class="r-card">
+                    <div class="r-icon">🔐</div>
+                    <div class="r-content">
+                        <div class="r-name">TryHackMe</div>
+                        <div class="r-desc">Gamified cyber security learning platform. Hands-on exercises for learning networking and ethical hacking.</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="res-section">
+            <h2 class="res-title">Core Engineering & Electronics</h2>
+            <div class="r-grid">
+                <a href="https://create.arduino.cc/projecthub" target="_blank" class="r-card">
+                    <div class="r-icon">🤖</div>
+                    <div class="r-content">
+                        <div class="r-name">Arduino Project Hub</div>
+                        <div class="r-desc">Explore electronics projects, from simple embedded circuits to complex IoT connected hardware.</div>
+                    </div>
+                </a>
+                <a href="https://nptel.ac.in/" target="_blank" class="r-card">
+                    <div class="r-icon">📐</div>
+                    <div class="r-content">
+                        <div class="r-name">NPTEL Courses</div>
+                        <div class="r-desc">High quality, free technical lectures from IIT professors covering deep core mechanical and civil concepts.</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="res-section">
+            <h2 class="res-title">Exam Prep & MBA</h2>
+            <div class="r-grid">
+                <a href="https://www.gregmat.com/" target="_blank" class="r-card">
+                    <div class="r-icon">🎓</div>
+                    <div class="r-content">
+                        <div class="r-name">GregMat</div>
+                        <div class="r-desc">The most cost-effective and highest quality preparation for cracking the GRE for MS abroad.</div>
+                    </div>
+                </a>
+                <a href="https://insideiim.com/" target="_blank" class="r-card">
+                    <div class="r-icon">📈</div>
+                    <div class="r-content">
+                        <div class="r-name">InsideIIM</div>
+                        <div class="r-desc">Insights, interview experiences, and guidance for switching from engineering into product management and Top B-schools.</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="res-section">
+            <h2 class="res-title">Projects & Development</h2>
+            <div class="r-grid">
+                <a href="https://github.com/" target="_blank" class="r-card">
+                    <div class="r-icon">🐙</div>
+                    <div class="r-content">
+                        <div class="r-name">GitHub</div>
+                        <div class="r-desc">Host your projects and collaborate. Maintain a good commit history to impress recruiters.</div>
+                    </div>
+                </a>
+                <a href="https://www.freecodecamp.org/" target="_blank" class="r-card">
+                    <div class="r-icon">🎥</div>
+                    <div class="r-content">
+                        <div class="r-name">FreeCodeCamp</div>
+                        <div class="r-desc">Thousands of hours of free tutorials on Web Dev, Python, Data Science and more.</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const knob = document.getElementById('toggle-knob');
+            if (html.getAttribute('data-theme') === 'dark') {
+                html.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+                if(knob) knob.textContent = '🌙';
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                if(knob) knob.textContent = '☀️';
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const knob = document.getElementById('toggle-knob');
+            const theme = document.documentElement.getAttribute('data-theme');
+            if (knob) knob.textContent = theme === 'dark' ? '☀️' : '🌙';
+        });
+    </script>
+</body>
+</html>

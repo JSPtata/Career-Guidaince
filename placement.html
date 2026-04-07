@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Placement Prep — CareerCompass</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <!-- Reusing same styles for consistency -->
+    <style>
+        /* ─── THEME TOKENS ─── */
+        [data-theme="dark"] {
+            --bg: #0a0d14;
+            --surface: #111520;
+            --card: #161b2e;
+            --border: #1e2640;
+            --accent: #3d7fff;
+            --accent2: #00e5b0;
+            --accent3: #ff6b35;
+            --text: #c8cce0;
+            --muted: #6b7394;
+            --heading: #ffffff;
+            --nav-bg: rgba(10, 13, 20, 0.88);
+            --toggle-bg: #1e2640;
+            --shadow: rgba(0, 0, 0, 0.5);
+        }
+        [data-theme="light"] {
+            --bg: #f5f6fa;
+            --surface: #eceef6;
+            --card: #ffffff;
+            --border: #dde0ef;
+            --accent: #2563eb;
+            --accent2: #059669;
+            --accent3: #ea580c;
+            --text: #374151;
+            --muted: #6b7280;
+            --heading: #111827;
+            --nav-bg: rgba(245, 246, 250, 0.92);
+            --toggle-bg: #dde0ef;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Space Grotesk', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; transition: background 0.35s, color 0.35s; }
+
+        /* ─── NAV ─── */
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1rem 5vw; background: var(--nav-bg); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+        .nav-logo { font-family: 'Space Mono', monospace; font-weight: 700; font-size: 1.2rem; color: var(--heading); letter-spacing: -0.5px; text-decoration: none;}
+        .nav-logo span { color: var(--accent); }
+        .nav-center { display: flex; gap: 2rem; list-style: none; }
+        .nav-center a { font-family: 'Space Mono', monospace; font-size: 0.78rem; font-weight: 400; color: var(--muted); text-decoration: none; letter-spacing: 0.3px; transition: color 0.2s; }
+        .nav-center a:hover, .nav-center a.active { color: var(--accent); }
+        .nav-right { display: flex; align-items: center; gap: 0.9rem; }
+        
+        .theme-toggle { width: 44px; height: 24px; background: var(--toggle-bg); border: 1px solid var(--border); border-radius: 100px; cursor: pointer; display: flex; align-items: center; padding: 3px; position: relative; }
+        .toggle-knob { width: 18px; height: 18px; border-radius: 50%; background: var(--accent); transition: transform 0.3s; display: flex; align-items: center; justify-content: center; font-size: 10px; }
+        [data-theme="light"] .toggle-knob { transform: translateX(20px); }
+        .nav-cta { background: var(--accent); color: #fff; text-decoration:none; padding: 0.5rem 1.2rem; border-radius: 6px; font-family: 'Space Mono', monospace; font-size: 0.75rem; }
+
+        /* ─── PAGE HEADER ─── */
+        .page-header { padding: 7.5rem 5vw 3rem; text-align: center; position: relative; overflow: hidden; }
+        .page-header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 50px 50px; mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%); opacity: 0.35; }
+        .page-label { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent2); margin-bottom: 0.9rem; position: relative; z-index: 2; }
+        .page-title { font-family: 'Space Mono', monospace; font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 700; color: var(--heading); letter-spacing: -1px; line-height: 1.1; margin-bottom: 1rem; position: relative; z-index: 2; }
+        .page-sub { font-size: 1rem; color: var(--muted); max-width: 500px; margin: 0 auto 2.5rem; line-height: 1.7; position: relative; z-index: 2; }
+
+        /* ─── MAIN CONTENT ─── */
+        .main-wrap { max-width: 1000px; margin: 0 auto; padding: 2rem 5vw 5rem; }
+        .prep-section { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 2.5rem; margin-bottom: 2rem; }
+        .prep-title { font-family: 'Space Mono', monospace; font-size: 1.4rem; font-weight: 700; color: var(--heading); margin-bottom: 1rem; }
+        .prep-desc { color: var(--muted); line-height: 1.6; margin-bottom: 2rem; font-size: 0.95rem; }
+        
+        .timeline { position: relative; padding-left: 2rem; border-left: 2px solid var(--border); }
+        .timeline-item { position: relative; margin-bottom: 2rem; }
+        .timeline-item:last-child { margin-bottom: 0; }
+        .timeline-dot { position: absolute; left: -2.7rem; top: 0; width: 24px; height: 24px; border-radius: 50%; background: var(--card); border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--accent); font-weight: bold;}
+        .timeline-content h3 { font-family: 'Space Mono', monospace; font-size: 1.1rem; color: var(--heading); margin-bottom: 0.5rem; }
+        .timeline-content p { color: var(--muted); font-size: 0.9rem; margin-bottom: 0.8rem; line-height: 1.5; }
+        
+        .resource-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+        .res-card { display: block; padding: 1.2rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; text-decoration: none; transition: all 0.2s; }
+        .res-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+        .res-card h4 { font-family: 'Space Mono', monospace; color: var(--heading); font-size: 0.9rem; margin-bottom: 0.3rem;}
+        .res-card p { color: var(--muted); font-size: 0.8rem; }
+        
+        @media(max-width: 768px) { .nav-center { display: none; } }
+    </style>
+    <script>
+        // Persistent Theme Logic
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            }
+        })();
+    </script>
+</head>
+
+<body>
+    <!-- NAV -->
+    <nav>
+        <a href="home.html" class="nav-logo" style="text-decoration:none">Career<span>Compass</span></a>
+        <ul class="nav-center">
+            <li><a href="home.html#features">Features</a></li>
+            <li><a href="careerpath.html">Career Paths</a></li>
+            <li><a href="home.html#how">How It Works</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="placement.html" class="active">Placement</a></li>
+        </ul>
+        <div class="nav-right">
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                <div class="toggle-knob" id="toggle-knob">☀️</div>
+            </button>
+            <a href="careerpath.html" class="nav-cta" style="text-decoration:none">Get Started →</a>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <div class="page-header">
+        <div class="page-label">Placement Preparation</div>
+        <h1 class="page-title">Crack your <span style="color:var(--accent2)">dream job</span></h1>
+        <p class="page-sub">A step-by-step roadmap for standard campus placements. Suitable for SDE, Analytics, and Core roles.</p>
+    </div>
+
+    <!-- MAIN -->
+    <div class="main-wrap">
+        
+        <div class="prep-section">
+            <h2 class="prep-title">Aptitude & Logical Reasoning</h2>
+            <p class="prep-desc">The first round of almost every company is an online assessment (OA) testing your quants, logic, and verbal skills. Do not ignore this.</p>
+            <div class="resource-grid">
+                <a href="#" class="res-card"><h4>IndiaBix</h4><p>The standard for quantitative aptitude questions.</p></a>
+                <a href="#" class="res-card"><h4>Arun Sharma</h4><p>Book for advanced CAT-level aptitude prep.</p></a>
+            </div>
+        </div>
+
+        <div class="prep-section" id="resume-builder">
+            <h2 class="prep-title">Resume Builder & ATS Guide</h2>
+            <p class="prep-desc">Before applying to companies, your resume must pass the Applicant Tracking System (ATS). Avoid complex columns and graphics. Use a simple, single-column text format.</p>
+            
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                <div style="background: rgba(255, 80, 80, 0.05); border: 1px solid rgba(255, 80, 80, 0.3); padding: 1.5rem; border-radius: 10px;">
+                    <h3 style="color: #f87171; font-family: 'Space Mono', monospace; margin-bottom: 0.8rem; font-size: 1rem;">❌ Bad Resume</h3>
+                    <ul style="color: var(--muted); font-size: 0.85rem; line-height: 1.6; padding-left: 1.2rem;">
+                        <li style="margin-bottom:0.4rem">Two-column layout (ATS cannot parse properly)</li>
+                        <li style="margin-bottom:0.4rem">Progress bars for skills (e.g., Python 80%)</li>
+                        <li style="margin-bottom:0.4rem">Headshot photos or colourful backgrounds</li>
+                        <li>Vague points: "Worked on frontend"</li>
+                    </ul>
+                </div>
+                <div style="background: rgba(0, 229, 176, 0.05); border: 1px solid rgba(0, 229, 176, 0.3); padding: 1.5rem; border-radius: 10px;">
+                    <h3 style="color: var(--accent2); font-family: 'Space Mono', monospace; margin-bottom: 0.8rem; font-size: 1rem;">✅ Good ATS Resume</h3>
+                    <ul style="color: var(--muted); font-size: 0.85rem; line-height: 1.6; padding-left: 1.2rem;">
+                        <li style="margin-bottom:0.4rem">Single column layout (e.g. Jake's Resume)</li>
+                        <li style="margin-bottom:0.4rem">Formula: "Accomplished [X] measured by [Y], by doing [Z]"</li>
+                        <li style="margin-bottom:0.4rem">Keywords matching the job description</li>
+                        <li>Clickable GitHub, LinkedIn, and Portfolio links</li>
+                    </ul>
+                </div>
+            </div>
+            <a href="https://www.overleaf.com/latex/templates/jakes-resume/syzfjbzwjncs" target="_blank" class="nav-cta" style="display:inline-block; font-size: 0.85rem; padding: 0.7rem 1.4rem;">Get Standard ATS Template →</a>
+        </div>
+
+        <div class="prep-section">
+            <h2 class="prep-title">6-Month Preparation Timeline</h2>
+            <p class="prep-desc">Assuming your placements start in August (7th Semester), here is how you should structure your final 6 months.</p>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot">1</div>
+                    <div class="timeline-content">
+                        <h3>Month 1: Resume & Fundamentals</h3>
+                        <p>Lock your resume format (1-page standard ATS format). Revise core CS fundamentals: OS, DBMS, Computer Networks, and OOPS. If you are in Core, revise your main subjects.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">2</div>
+                    <div class="timeline-content">
+                        <h3>Month 2-4: Intensive DSA / Subject Revision</h3>
+                        <p>Solve 2-3 LeetCode problems daily. Master arrays, strings, standard dynamic programming, and graphs. Focus on speed and edge cases.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">3</div>
+                    <div class="timeline-content">
+                        <h3>Month 5: Projects & Aptitude</h3>
+                        <p>Polish your 2 best projects. Know them inside out—be ready to explain architectural choices. Start taking daily aptitude tests (30 mins daily).</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">4</div>
+                    <div class="timeline-content">
+                        <h3>Month 6: Mock Interviews</h3>
+                        <p>Give mock interviews with seniors or on platforms like Pramp. Practice speaking your thought process out loud while coding.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const knob = document.getElementById('toggle-knob');
+            if (html.getAttribute('data-theme') === 'dark') {
+                html.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+                if(knob) knob.textContent = '🌙';
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                if(knob) knob.textContent = '☀️';
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const knob = document.getElementById('toggle-knob');
+            const theme = document.documentElement.getAttribute('data-theme');
+            if (knob) knob.textContent = theme === 'dark' ? '☀️' : '🌙';
+        });
+    </script>
+</body>
+</html>

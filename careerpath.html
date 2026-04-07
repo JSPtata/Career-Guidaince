@@ -1,0 +1,2070 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Career Paths — CareerCompass</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <style>
+        /* ─── THEMES ─── */
+        [data-theme="dark"] {
+            --bg: #0a0d14;
+            --surface: #111520;
+            --card: #161b2e;
+            --card-hover: #1b2238;
+            --border: #1e2640;
+            --border-hover: #2e3a5e;
+            --accent: #3d7fff;
+            --accent2: #00e5b0;
+            --accent3: #ff6b35;
+            --accent4: #a855f7;
+            --text: #c8cce0;
+            --muted: #6b7394;
+            --heading: #ffffff;
+            --nav-bg: rgba(10, 13, 20, 0.88);
+            --tag-bg: rgba(255, 255, 255, 0.05);
+            --shadow: rgba(0, 0, 0, 0.5);
+            --pill-bg: #161b2e;
+            --pill-active: #3d7fff;
+        }
+
+        [data-theme="light"] {
+            --bg: #f5f6fa;
+            --surface: #eceef6;
+            --card: #ffffff;
+            --card-hover: #f8f9ff;
+            --border: #dde0ef;
+            --border-hover: #b0b8d8;
+            --accent: #2563eb;
+            --accent2: #059669;
+            --accent3: #ea580c;
+            --accent4: #7c3aed;
+            --text: #374151;
+            --muted: #6b7280;
+            --heading: #111827;
+            --nav-bg: rgba(245, 246, 250, 0.92);
+            --tag-bg: rgba(0, 0, 0, 0.05);
+            --shadow: rgba(0, 0, 0, 0.1);
+            --pill-bg: #e2e5f0;
+            --pill-active: #2563eb;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            transition: background 0.35s, color 0.35s;
+        }
+
+        /* ─── NAV ─── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 5vw;
+            background: var(--nav-bg);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            transition: background 0.35s, border-color 0.35s;
+        }
+
+        .nav-logo {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--heading);
+            text-decoration: none;
+        }
+
+        .nav-logo span {
+            color: var(--accent);
+        }
+
+        .nav-center {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-center a {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.78rem;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav-center a:hover,
+        .nav-center a.active {
+            color: var(--accent);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+        }
+
+        .theme-toggle {
+            width: 44px;
+            height: 24px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 3px;
+            transition: background 0.3s;
+        }
+
+        .toggle-knob {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--accent);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        [data-theme="light"] .toggle-knob {
+            transform: translateX(20px);
+        }
+
+        .nav-cta {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            transition: opacity 0.2s, transform 0.15s;
+        }
+
+        .nav-cta:hover {
+            opacity: 0.85;
+            transform: translateY(-1px);
+        }
+
+        /* ─── PAGE HEADER ─── */
+        .page-header {
+            padding: 7.5rem 5vw 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 50px 50px;
+            mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
+            opacity: 0.35;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            pointer-events: none;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: rgba(61, 127, 255, 0.1);
+            top: -100px;
+            left: 10%;
+            animation: floatA 9s ease-in-out infinite;
+        }
+
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: rgba(0, 229, 176, 0.08);
+            top: -50px;
+            right: 10%;
+            animation: floatB 11s ease-in-out infinite;
+        }
+
+        @keyframes floatA {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-20px)
+            }
+        }
+
+        @keyframes floatB {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(16px)
+            }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.9rem;
+            position: relative;
+            z-index: 2;
+            animation: fadeUp 0.7s 0.1s ease both;
+        }
+
+        .page-title {
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(2rem, 4.5vw, 3.2rem);
+            font-weight: 700;
+            color: var(--heading);
+            letter-spacing: -1px;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+            animation: fadeUp 0.7s 0.2s ease both;
+        }
+
+        .page-title .hl {
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-sub {
+            font-size: 1rem;
+            color: var(--muted);
+            max-width: 500px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+            position: relative;
+            z-index: 2;
+            animation: fadeUp 0.7s 0.3s ease both;
+        }
+
+        /* ─── BRANCH FILTER PILLS ─── */
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 2;
+            animation: fadeUp 0.7s 0.4s ease both;
+        }
+
+        .filter-pill {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.72rem;
+            padding: 0.45rem 1.1rem;
+            border-radius: 100px;
+            border: 1px solid var(--border);
+            background: var(--pill-bg);
+            color: var(--muted);
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .filter-pill:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .filter-pill.active {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+            box-shadow: 0 4px 14px rgba(61, 127, 255, 0.3);
+        }
+
+        /* ─── MAIN LAYOUT ─── */
+        .main-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 5vw 5rem;
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        @media(max-width: 900px) {
+            .main-wrap {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                display: none;
+            }
+        }
+
+        /* ─── SIDEBAR ─── */
+        .sidebar {
+            position: sticky;
+            top: 5rem;
+        }
+
+        .sidebar-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.4rem;
+            margin-bottom: 1.2rem;
+            transition: background 0.35s, border-color 0.35s;
+        }
+
+        .sidebar-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .sidebar-link {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.78rem;
+            color: var(--muted);
+            text-decoration: none;
+            padding: 0.45rem 0.7rem;
+            border-radius: 7px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            border: 1px solid transparent;
+        }
+
+        .sidebar-link:hover {
+            color: var(--accent);
+            background: rgba(61, 127, 255, 0.07);
+            border-color: rgba(61, 127, 255, 0.2);
+        }
+
+        .sidebar-link.active {
+            color: var(--accent);
+            background: rgba(61, 127, 255, 0.1);
+            border-color: rgba(61, 127, 255, 0.25);
+        }
+
+        .sidebar-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: currentColor;
+            flex-shrink: 0;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .stat-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .stat-row-label {
+            font-size: 0.78rem;
+            color: var(--muted);
+        }
+
+        .stat-row-value {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--heading);
+        }
+
+        /* ─── PATHS GRID ─── */
+        .paths-section {}
+
+        .branch-group {
+            margin-bottom: 3.5rem;
+        }
+
+        .branch-group-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.4rem;
+            padding-bottom: 0.9rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .branch-emoji-lg {
+            font-size: 1.6rem;
+        }
+
+        .branch-group-title {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--heading);
+            letter-spacing: -0.3px;
+        }
+
+        .branch-group-count {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--muted);
+            margin-left: auto;
+            background: var(--tag-bg);
+            padding: 0.25rem 0.7rem;
+            border-radius: 100px;
+            border: 1px solid var(--border);
+        }
+
+        .paths-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.2rem;
+        }
+
+        /* ─── PATH CARD ─── */
+        .path-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .path-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--card-accent-a), var(--card-accent-b));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .path-card:hover {
+            border-color: var(--border-hover);
+            background: var(--card-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 36px var(--shadow);
+        }
+
+        .path-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .path-card-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 0.9rem;
+        }
+
+        .path-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .path-badge {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            padding: 0.22rem 0.65rem;
+            border-radius: 100px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-hot {
+            background: rgba(255, 107, 53, 0.15);
+            color: var(--accent3);
+        }
+
+        .badge-new {
+            background: rgba(0, 229, 176, 0.12);
+            color: var(--accent2);
+        }
+
+        .badge-top {
+            background: rgba(61, 127, 255, 0.12);
+            color: var(--accent);
+        }
+
+        .badge-core {
+            background: rgba(168, 85, 247, 0.12);
+            color: var(--accent4);
+        }
+
+        .path-name {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 0.92rem;
+            color: var(--heading);
+            margin-bottom: 0.45rem;
+            letter-spacing: -0.2px;
+        }
+
+        .path-desc {
+            font-size: 0.83rem;
+            color: var(--muted);
+            line-height: 1.65;
+            margin-bottom: 1.1rem;
+        }
+
+        .path-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .path-tag {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            background: var(--tag-bg);
+            border: 1px solid var(--border);
+            color: var(--muted);
+            padding: 0.2rem 0.55rem;
+            border-radius: 5px;
+        }
+
+        .path-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .path-meta {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--muted);
+        }
+
+        .path-meta span {
+            color: var(--heading);
+            font-weight: 700;
+        }
+
+        .path-arrow {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            background: rgba(61, 127, 255, 0.1);
+            border: 1px solid rgba(61, 127, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 0.9rem;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .path-card:hover .path-arrow {
+            background: var(--accent);
+            color: #fff;
+            transform: translateX(2px);
+        }
+
+        /* ─── ROADMAP MODAL ─── */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(6px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            width: 100%;
+            max-width: 680px;
+            max-height: 85vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.open .modal {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.6rem 1.8rem;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            background: var(--card);
+            z-index: 1;
+            border-radius: 18px 18px 0 0;
+        }
+
+        .modal-title-group {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+        }
+
+        .modal-close {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: var(--tag-bg);
+            border: 1px solid var(--border);
+            color: var(--muted);
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 80, 80, 0.12);
+            color: #f87171;
+            border-color: rgba(255, 80, 80, 0.3);
+        }
+
+        .modal-body {
+            padding: 1.8rem;
+        }
+
+        .modal-path-title {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--heading);
+        }
+
+        .modal-path-sub {
+            font-size: 0.82rem;
+            color: var(--muted);
+            margin-top: 0.2rem;
+        }
+
+        .modal-section-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin: 1.6rem 0 1rem;
+        }
+
+        .modal-section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .roadmap-steps {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            padding: 1.5rem 0;
+            align-items: center;
+        }
+
+        .roadmap-steps::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--border);
+            transform: translateX(-50%);
+            border-radius: 4px;
+            /* Dashed line effect */
+            background-image: linear-gradient(var(--card) 40%, transparent 40%);
+            background-size: 4px 16px;
+            z-index: 0;
+        }
+
+        .roadmap-step {
+            display: flex;
+            justify-content: flex-end;
+            position: relative;
+            width: 50%;
+            align-self: flex-start;
+            margin-bottom: 2.5rem;
+            padding-right: 2.5rem;
+            z-index: 1;
+        }
+
+        .roadmap-step:nth-child(even) {
+            align-self: flex-end;
+            justify-content: flex-start;
+            padding-right: 0;
+            padding-left: 2.5rem;
+        }
+
+        .step-pin-wrap {
+            position: absolute;
+            top: 0;
+            right: -20px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .roadmap-step:nth-child(even) .step-pin-wrap {
+            left: -20px;
+            right: auto;
+        }
+
+        /* Pure CSS Map Pin */
+        .step-pin {
+            width: 26px;
+            height: 26px;
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            border: 3px solid var(--card);
+            position: relative;
+        }
+
+        .step-pin-inner {
+            width: 8px;
+            height: 8px;
+            background: var(--card);
+            border-radius: 50%;
+        }
+
+        .step-content {
+            width: 100%;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.2rem;
+            position: relative;
+            box-shadow: 0 4px 15px var(--shadow);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .step-content:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent);
+        }
+
+        .step-year {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .step-heading {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 0.88rem;
+            color: var(--heading);
+            margin-bottom: 0.5rem;
+        }
+
+        .step-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .step-item {
+            font-size: 0.82rem;
+            color: var(--muted);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .step-item::before {
+            content: '›';
+            color: var(--accent);
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .skills-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-chip {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.72rem;
+            background: var(--tag-bg);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 0.28rem 0.7rem;
+            border-radius: 6px;
+        }
+
+        .resource-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .resource-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            padding: 0.7rem 0.9rem;
+            text-decoration: none;
+            transition: border-color 0.2s;
+        }
+
+        .resource-item:hover {
+            border-color: var(--accent);
+        }
+
+        .resource-icon {
+            font-size: 1rem;
+        }
+
+        .resource-info {
+            flex: 1;
+        }
+
+        .resource-name {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--heading);
+            font-weight: 700;
+        }
+
+        .resource-type {
+            font-size: 0.72rem;
+            color: var(--muted);
+            margin-top: 0.1rem;
+        }
+
+        .resource-arrow {
+            color: var(--muted);
+            font-size: 0.8rem;
+        }
+
+        .modal-salary {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .salary-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.9rem;
+            text-align: center;
+        }
+
+        .salary-range {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--heading);
+        }
+
+        .salary-label {
+            font-size: 0.72rem;
+            color: var(--muted);
+            margin-top: 0.2rem;
+        }
+
+        /* ─── SEARCH BAR ─── */
+        .search-wrap {
+            max-width: 480px;
+            margin: 0 auto 2.5rem;
+            position: relative;
+            z-index: 2;
+            animation: fadeUp 0.7s 0.45s ease both;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 2.8rem;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .search-input::placeholder {
+            color: var(--muted);
+        }
+
+        .search-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(61, 127, 255, 0.12);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 0.9rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--muted);
+            font-size: 0.9rem;
+            pointer-events: none;
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media(max-width: 768px) {
+            .nav-center {
+                display: none;
+            }
+
+            .modal-salary {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            /* Mobile map fallback */
+            .roadmap-steps::before {
+                left: 20px;
+                transform: none;
+            }
+            .roadmap-step, .roadmap-step:nth-child(even) {
+                width: 100%;
+                margin-left: 0;
+                align-self: flex-start;
+                justify-content: flex-end;
+                padding-right: 0;
+                padding-left: 4rem;
+            }
+            .roadmap-step .step-pin-wrap, .roadmap-step:nth-child(even) .step-pin-wrap {
+                left: 0px;
+                right: auto;
+            }
+        }
+
+        @media(max-width: 480px) {
+            .paths-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <script>
+        // Persistent Theme Logic
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            }
+        })();
+    </script>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <a href="home.html" class="nav-logo" style="text-decoration:none">Career<span>Compass</span></a>
+        <ul class="nav-center">
+            <li><a href="home.html#features">Features</a></li>
+            <li><a href="careerpath.html" class="active">Career Paths</a></li>
+            <li><a href="home.html#how">How It Works</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="placement.html">Placement</a></li>
+        </ul>
+        <div class="nav-right">
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                <div class="toggle-knob" id="toggle-knob">☀️</div>
+            </button>
+            <a href="careerpath.html" class="nav-cta" style="text-decoration:none">Get Started →</a>
+        </div>
+    </nav>
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="page-label">Career Paths</div>
+        <h1 class="page-title">Find your <span class="hl">perfect path</span><br />after B.Tech</h1>
+        <p class="page-sub">Browse branch-specific career tracks. Click any card to see the full roadmap, required
+            skills, and resources.</p>
+
+        <!-- SEARCH -->
+        <div class="search-wrap">
+            <span class="search-icon">🔍</span>
+            <input type="text" class="search-input" placeholder="Search paths, skills, branches..." id="searchInput"
+                oninput="filterSearch(this.value)" />
+        </div>
+
+        <!-- FILTER PILLS -->
+        <div class="filter-bar" id="filterBar">
+            <button class="filter-pill active" onclick="filterBranch('all', this)">All Branches</button>
+            <button class="filter-pill" onclick="filterBranch('cse', this)">💻 CSE / IT</button>
+            <button class="filter-pill" onclick="filterBranch('ece', this)">📡 ECE / EEE</button>
+            <button class="filter-pill" onclick="filterBranch('mech', this)">⚙️ Mechanical</button>
+            <button class="filter-pill" onclick="filterBranch('civil', this)">🏗️ Civil</button>
+            <button class="filter-pill" onclick="filterBranch('ai', this)">🤖 AI & DS</button>
+            <button class="filter-pill" onclick="filterBranch('core', this)">🔬 Core / Other</button>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-wrap">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-card">
+                <div class="sidebar-title">Jump To</div>
+                <div class="sidebar-links">
+                    <a href="#cse" class="sidebar-link active"><span class="sidebar-dot"></span>CSE / IT</a>
+                    <a href="#ece" class="sidebar-link"><span class="sidebar-dot"></span>ECE / EEE</a>
+                    <a href="#mech" class="sidebar-link"><span class="sidebar-dot"></span>Mechanical</a>
+                    <a href="#civil" class="sidebar-link"><span class="sidebar-dot"></span>Civil</a>
+                    <a href="#ai" class="sidebar-link"><span class="sidebar-dot"></span>AI & DS</a>
+                    <a href="#core" class="sidebar-link"><span class="sidebar-dot"></span>Core / Other</a>
+                </div>
+            </div>
+            <div class="sidebar-card">
+                <div class="sidebar-title">Overview</div>
+                <div class="stat-row"><span class="stat-row-label">Total Paths</span><span
+                        class="stat-row-value">32</span></div>
+                <div class="stat-row"><span class="stat-row-label">Branches</span><span class="stat-row-value">6</span>
+                </div>
+                <div class="stat-row"><span class="stat-row-label">Resources</span><span
+                        class="stat-row-value">100+</span></div>
+                <div class="stat-row"><span class="stat-row-label">Updated</span><span
+                        class="stat-row-value">2025</span></div>
+            </div>
+        </aside>
+
+        <!-- PATHS -->
+        <div class="paths-section" id="pathsSection">
+
+            <!-- CSE / IT -->
+            <div class="branch-group" id="cse" data-branch="cse">
+                <div class="branch-group-header">
+                    <span class="branch-emoji-lg">💻</span>
+                    <span class="branch-group-title">CSE / IT</span>
+                    <span class="branch-group-count">6 paths</span>
+                </div>
+                <div class="paths-grid">
+
+                    <div class="path-card" style="--card-accent-a:#3d7fff;--card-accent-b:#00e5b0" data-branch="cse"
+                        data-tags="software developer sde fullstack backend" onclick="openModal('sde')">
+                        <div class="path-card-top">
+                            <div class="path-icon fi-blue">👨‍💻</div>
+                            <span class="path-badge badge-hot">🔥 Hot</span>
+                        </div>
+                        <div class="path-name">Software Development</div>
+                        <div class="path-desc">Build products used by millions. Master full-stack web, mobile, or
+                            backend systems engineering.</div>
+                        <div class="path-tags">
+                            <span class="path-tag">DSA</span><span class="path-tag">System Design</span><span
+                                class="path-tag">React</span><span class="path-tag">Node.js</span>
+                        </div>
+                        <div class="path-footer">
+                            <div class="path-meta">Avg. CTC <span>₹8–25 LPA</span></div>
+                            <div class="path-arrow">→</div>
+                        </div>
+                    </div>
+
+                    <div class="path-card" style="--card-accent-a:#00e5b0;--card-accent-b:#3d7fff" data-branch="cse"
+                        data-tags="data science ml machine learning ai" onclick="openModal('ds')">
+                        <div class="path-card-top">
+                            <div class="path-icon fi-green">📊</div>
+                            <span class="path-badge badge-new">✨ Rising</span>
+                        </div>
+                        <div class="path-name">Data Science & ML</div>
+                        <div class="path-desc">Work with large datasets, build ML models, and drive data-backed
+                            decisions at top companies.</div>
+                        <div class="path-tags">
+                            <span class="path-tag">Python</span><span class="path-tag">ML</span><span
+                                class="path-tag">SQL</span><span class="path-tag">TensorFlow</span>
+                        </div>
+                        <div class="path-footer">
+                            <div class="path-meta">Avg. CTC <span>₹10–30 LPA</span></div>
+                            <div class="path-arrow">→</div>
+                        </div>
+                    </div>
+
+                    <div class="path-card" style="--card-accent-a:#a855f7;--card-accent-b:#3d7fff" data-branch="cse"
+                        data-tags="devops cloud aws azure infrastructure" onclick="openModal('devops')">
+                        <div class="path-card-top">
+                            <div class="path-icon fi-purple">☁️</div>
+                            <span class="path-badge badge-top">⭐ Top</span>
+                        </div>
+                        <div class="path-name">DevOps & Cloud</div>
+                        <div class="path-desc">Bridge development and operations. Deploy, scale, and manage modern cloud
+                            infrastructure.</div>
+                        <div class="path-tags">
+                            <span class="path-tag">AWS</span><span class="path-tag">Docker</span><span
+                                class="path-tag">Kubernetes</span><span class="path-tag">CI/CD</span>
+                        </div>
+                        <div class="path-footer">
+                            <div class="path-meta">Avg. CTC <span>₹9–22 LPA</span></div>
+                            <div class="path-arrow">→</div>
+                        </div>
+                    </div>
+
+                    <div class="path-card" style="--card-accent-a:#ff6b35;--card-accent-b:#a855f7" data-branch="cse"
+                        data-tags="cybersecurity security ethical hacking" onclick="openModal('cyber')">
+                        <div class="path-card-top">
+                            <div class="path-icon fi-orange">🔐</div>
+                            <span class="path-badge badge-hot">🔥 Hot</span>
+                        </div>
+                        <div class="path-name">Cybersecurity</div>
+                        <div class="path-desc">Protect systems, networks and data. Work in ethical hacking, security
+                            audits, or SOC teams.</div>
+                        <div class="path-tags">
+                            <span class="path-tag">Linux</span><span class="path-tag">Networking</span><span
+                                class="path-tag">CEH</span><span class="path-tag">OSCP</span>
+                        </div>
+                        <div class="path-footer">
+                            <div class="path-meta">Avg. CTC <span>₹7–20 LPA</span></div>
+                            <div class="path-arrow">→</div>
+                        </div>
+                    </div>
+
+                    <div class="path-card" style="--card-accent-a:#3d7fff;--card-accent-b:#a855f7" data-branch="cse"
+                        data-tags="product management pm mba" onclick="openModal('pm')">
+                        <div class="path-card-top">
+                            <div class="path-icon fi-blue">🧭</div>
+                            <span class="path-badge badge-new">✨ Rising</span>
+                        </div>
+                        <div class="path-name">Product Management</div>
+                        <div class="path-desc">Lead product strategy and roadmaps. Bridge tech and business at startups
+                            and big tech.</div>
+                        <div class="path-tags">
+                            <span class="path-tag">Roadmapping</span><span class="path-tag">Analytics</span><span
+                                class="path-tag">SQL</span><span class="path-tag">UX</span>
+                        </div>
+                        <div class="path-footer">
+                            <div class="path-meta">Avg. CTC <span>₹12–35 LPA</span></div>
+                            <div class="path-arrow">→</div>
+                        </div>
+                    </div>
+
+                    <div class="path-card" style="--card-accent-a:#00e5b0;--card-accent-b:#a855f7" data-branch="cse"
+                        data-tags="ms gre higher studies abroad masters" onclick="openModal('ms')">
+                        <div class="path-card-top">
+                            <div class="path-icon fi-green">🎓</div>
+                            <span class="path-badge badge-top">⭐ Popular</span>
+                        </div>
+                        <div class="path-name">MS Abroad (CS)</div>
+                        <div class="path-desc">Pursue a Master's at top universities in the USA, Canada, Germany, or UK
+                            in Computer Science.</div>
+                        <div class="path-tags">
+                            <span class="path-tag">GRE</span><span class="path-tag">IELTS/TOEFL</span><span
+                                class="path-tag">SOP</span><span class="path-tag">Research</span>
+                        </div>
+                        <div class="path-footer">
+                            <div class="path-meta">Post-MS CTC <span>$80K–150K</span></div>
+                            <div class="path-arrow">→</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ECE / EEE -->
+            <div class="branch-group" id="ece" data-branch="ece">
+                <div class="branch-group-header">
+                    <span class="branch-emoji-lg">📡</span>
+                    <span class="branch-group-title">ECE / EEE</span>
+                    <span class="branch-group-count">4 paths</span>
+                </div>
+                <div class="paths-grid">
+
+                    <div class="path-card" style="--card-accent-a:#3d7fff;--card-accent-b:#00e5b0" data-branch="ece"
+                        data-tags="vlsi chip design embedded semiconductor" onclick="openModal('vlsi')">
+                        <div class="path-card-top">
+                            <div class="path-icon fi-blue">🔬</div>
+                            <span class="path-badge badge-top">⭐ Top</span>
+                        </div>
+                        <div class="path-name">VLSI & Chip Design</div>
+                        <div class="path-desc">Design ICs and chips for semiconductors. High-value niche with global
+                            demand post-CHIPS act.</div>
+                        <div class="path-tags">
+                            <span class="path-tag">Verilog</span><span class="path-tag">VHDL</span><span
+                                class="path-tag">Cadence</span><span class="path-tag">DFT</span>
+                        </div>
+                        <div class="path-footer">
+                            <div class="path-meta">Avg. CTC <span>₹8–22 LPA</span></div>
+                            <div class="path-arrow">→</div>
+                        </div>
+                    </div>
+
+                    <div class="path-card" style="--card-accent-a:#ff6b35;--card-accent-b:#3d7fff" data-branch="ece"
+                        data-tags="embedded systems iot firmware arduino" onclick="openModal('embedded')">
+                        <div class="path-card-top">
+                            <div class="path-icon fi-orange">🤖</div>
+                            <span class="path-badge badge-hot">🔥 Hot</span>
+                        </div>
+                        <div class="path-name">Embedded & IoT</div>
+                        <div class="path-desc">Program microcontrollers, build IoT systems, and work at the intersection
+                            of hardware and software.</div>
+                        <div class="path-tags">
+                            <span class="path-tag">C/C++</span><span class="path-tag">RTOS</span><span
+                                class="path-tag">Arduino</span><span class="path-tag">MQTT</span>
+                        </div>
+                        <div class="path-footer">
+                            <div class="path-meta">Avg. CTC <span>₹6–18 LPA</span></div>
+                            <div class="path-arrow">→</div>
+                        </div>
+                    </div>
+
+                    <div class="path-card" style="--card-accent-a:#a855f7;--card-accent-b:#00e5b0" data-branch="ece"
+                        data-tags="telecom 5g wireless networks signal" onclick="openModal('telecom')">
+                        <div class="path-card-top">
+                            <div class="path-icon fi-purple">📶</div>
+                            <span class="path-badge badge-new">✨ Rising</span>
+                        </div>
+                        <div class="path-name">Telecom & 5G</div>
+                        <div class="path-desc">Work on next-gen wireless networks, signal processing, and 5G/6G
+                            infrastructure at telcos.</div>
+                        <div class="path-tags">
+                            <span class="path-tag">RF Design</span><span class="path-tag">5G NR</span><span
+                                class="path-tag">MATLAB</span><span class="path-tag">DSP</span>
+                        </div>
+                        <div class="path-footer">
+                            <div class="path-meta">Avg. CTC <span>₹7–18 LPA</span></div>
+                            <div class="path-arrow">→</div>
+                        </div>
+                    </div>
+
+                    <div class="path-card" style="--card-accent-a:#00e5b0;--card-accent-b:#3d7fff" data-branch="ece"
+                        data-tags="gate psu public sector psus higher studies" onclick="openModal('gate_ece')">
+                        <div class="path-card-top">
+                            <div class="path-icon fi-green">📋</div>
+                            <span class="path-badge badge-top">⭐ Classic</span>
+                        </div>
+                        <div class="path-name">GATE & PSUs (ECE)</div>
+                        <div class="path-desc">Crack GATE for M.Tech at IITs/NITs or secure a PSU job at BHEL, BSNL,
+                            DRDO with top pay.</div>
+                        <div class="path-tags">
+                            <span class="path-tag">GATE</span><span class="path-tag">Electronics</span><span
+                                class="path-tag">Signals</span><span class="path-tag">Networks</span>
+                        </div>
+                        <div class="path-footer">
+                            <div class="path-meta">PSU CTC <span>₹8–16 LPA</span></div>
+                            <div class="path-arrow">→</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- MECHANICAL -->
+            <div class="branch-group" id="mech" data-branch="mech">
+                <div class="branch-group-header">
+                    <span class="branch-emoji-lg">⚙️</span>
+                    <span class="branch-group-title">Mechanical Engineering</span>
+                    <span class="branch-group-count">4 paths</span>
+                </div>
+                <div class="paths-grid">
+
+                    <div class="path-card" style="--card-accent-a:#ff6b35;--card-accent-b:#a855f7" data-branch="mech"
+                        data-tags="core mechanical design manufacturing automotive" onclick="openModal('core_mech')">
+                        <div class="path-card-top">
+                            <div class="path-icon fi-orange">🔧</div>
+                            <span class="path-badge badge-core">🔩 Core</span>
+                        </div>
+                        <div class="path-name">Core Manufacturing</div>
+                        <div class="path-desc">Work in automobile, aerospace, or heavy industry. Roles in design,
+                            production, and quality control.</div>
+                        <div class="path-tags">
+                            <span class="path-tag">CAD/CAM</span><span class="path-tag">AutoCAD</span><span
+                                class="path-tag">SolidWorks</span><span class="path-tag">GD&T</span>
+                        </div>
+                        <div class="path-footer">
+                            <div class="path-meta">Avg. CTC <span>₹4–12 LPA</span></div>
+                            <div class="path-arrow">→</div>
+                        </div>
+                    </div>
+
+                    <div class="path-card" style="--card-accent-a:#3d7fff;--card-accent-b:#ff6b35" data-branch="mech"
+                        data-tags="software mech coding python analytics" onclick="openModal('mech_sw')">
+                        <div class="path-card-top">
+                            <div class="path-icon fi-blue">💡</div>
+                            <span class="path-badge badge-hot">🔥 Hot</span>
+                        </div>
+                        <div class="path-name">Software (via Mech)</div>
+                        <div class="path-desc">Pivot to software engineering. Many Mech students crack SDE roles with
+                            strong DSA prep.</div>
+                        <div class="path-tags">
+                            <span class="path-tag">DSA</span><span class="path-tag">Python/C++</span><span
+                                class="path-tag">LeetCode</span><span class="path-tag">SQL</span>
+                        </div>
+                        <div class="path-footer">
+                            <div class="path-meta">Avg. CTC <span>₹6–18 LPA</span></div>
+                            <div class="path-arrow">→</div>
+                        </div>
+                    </div>
+
+                    <div class="path-card" style="--card-accent-a:#00e5b0;--card-accent-b:#3d7fff" data-branch="mech"
+                        data-tags="gate mtech iit nit higher studies" onclick="openModal('gate_mech')">
+                        <div class="path-card-top">
+                            <div class="path-icon fi-green">📋</div>
+                            <span class="path-badge badge-top">⭐ Classic</span>
+                        </div>
+                        <div class="path-name">GATE & M.Tech</div>
+                        <div class="path-desc">Pursue M.Tech at IITs or NITs, or crack PSU exams at ONGC, NTPC, IOCL
+                            with great packages.</div>
+                        <div class="path-tags">
+                            <span class="path-tag">GATE</span><span class="path-tag">Thermodynamics</span><span
+                                class="path-tag">FM</span><span class="path-tag">SOM</span>
+                        </div>
+                        <div class="path-footer">
+                            <div class="path-meta">PSU CTC <span>₹9–16 LPA</span></div>
+                            <div class="path-arrow">→</div>
+                        </div>
+                    </div>
+
+                    <div class="path-card" style="--card-accent-a:#a855f7;--card-accent-b:#ff6b35" data-branch="mech"
+                        data-tags="consulting management mba" onclick="openModal('mba_mech')">
+                        <div class="path-card-top">
+                            <div class="path-icon fi-purple">📈</div>
+                            <span class="path-badge badge-new">✨ Rising</span>
+                        </div>
+                        <div class="path-name">MBA & Consulting</div>
+                        <div class="path-desc">Combine engineering with business skills. IIM admits engineers with
+                            strong profiles and CAT scores.</div>
+                        <div class="path-tags">
+                            <span class="path-tag">CAT</span><span class="path-tag">GMAT</span><span
+                                class="path-tag">Case Study</span><span class="path-tag">Finance</span>
+                        </div>
+                        <div class="path-footer">
+                            <div class="path-meta">Post-MBA CTC <span>₹15–40 LPA</span></div>
+                            <div class="path-arrow">→</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- AI & DS -->
+            <div class="branch-group" id="ai" data-branch="ai">
+                <div class="branch-group-header">
+                    <span class="branch-emoji-lg">🤖</span>
+                    <span class="branch-group-title">AI & Data Science</span>
+                    <span class="branch-group-count">4 paths</span>
+                </div>
+                <div class="paths-grid">
+
+                    <div class="path-card" style="--card-accent-a:#00e5b0;--card-accent-b:#3d7fff" data-branch="ai"
+                        data-tags="machine learning ai deep learning nlp" onclick="openModal('ml_eng')">
+                        <div class="path-card-top">
+                            <div class="path-icon fi-green">🧠</div>
+                            <span class="path-badge badge-hot">🔥 Hot</span>
+                        </div>
+                        <div class="path-name">ML / AI Engineer</div>
+                        <div class="path-desc">Build and deploy AI systems. From LLMs to computer vision — the most
+                            in-demand role of the decade.</div>
+                        <div class="path-tags">
+                            <span class="path-tag">PyTorch</span><span class="path-tag">LLMs</span><span
+                                class="path-tag">MLOps</span><span class="path-tag">HuggingFace</span>
+                        </div>
+                        <div class="path-footer">
+                            <div class="path-meta">Avg. CTC <span>₹12–40 LPA</span></div>
+                            <div class="path-arrow">→</div>
+                        </div>
+                    </div>
+
+                    <div class="path-card" style="--card-accent-a:#3d7fff;--card-accent-b:#a855f7" data-branch="ai"
+                        data-tags="data analyst analytics bi dashboard tableau" onclick="openModal('da')">
+                        <div class="path-card-top">
+                            <div class="path-icon fi-blue">📉</div>
+                            <span class="path-badge badge-top">⭐ Stable</span>
+                        </div>
+                        <div class="path-name">Data Analyst</div>
+                        <div class="path-desc">Extract insights from data using SQL, Python, and BI tools. High demand
+                            across every industry.</div>
+                        <div class="path-tags">
+                            <span class="path-tag">SQL</span><span class="path-tag">Python</span><span
+                                class="path-tag">Tableau</span><span class="path-tag">Excel</span>
+                        </div>
+                        <div class="path-footer">
+                            <div class="path-meta">Avg. CTC <span>₹5–14 LPA</span></div>
+                            <div class="path-arrow">→</div>
+                        </div>
+                    </div>
+
+                    <div class="path-card" style="--card-accent-a:#a855f7;--card-accent-b:#00e5b0" data-branch="ai"
+                        data-tags="research phd academia papers publications" onclick="openModal('research')">
+                        <div class="path-card-top">
+                            <div class="path-icon fi-purple">🔭</div>
+                            <span class="path-badge badge-new">✨ Academic</span>
+                        </div>
+                        <div class="path-name">AI Research & PhD</div>
+                        <div class="path-desc">Publish papers, push the frontier of AI. Route via MS/PhD at top
+                            universities or IITB/IISC.</div>
+                        <div class="path-tags">
+                            <span class="path-tag">Research</span><span class="path-tag">Papers</span><span
+                                class="path-tag">Math</span><span class="path-tag">GRE</span>
+                        </div>
+                        <div class="path-footer">
+                            <div class="path-meta">PhD Stipend <span>$25K–40K/yr</span></div>
+                            <div class="path-arrow">→</div>
+                        </div>
+                    </div>
+
+                    <div class="path-card" style="--card-accent-a:#ff6b35;--card-accent-b:#00e5b0" data-branch="ai"
+                        data-tags="startup founder entrepreneur ai product" onclick="openModal('startup')">
+                        <div class="path-card-top">
+                            <div class="path-icon fi-orange">🚀</div>
+                            <span class="path-badge badge-hot">🔥 Bold</span>
+                        </div>
+                        <div class="path-name">AI Startup / Founder</div>
+                        <div class="path-desc">Build an AI-first startup. Leverage the current AI boom with your
+                            technical skills and product thinking.</div>
+                        <div class="path-tags">
+                            <span class="path-tag">LLMs</span><span class="path-tag">APIs</span><span
+                                class="path-tag">Product</span><span class="path-tag">Fundraising</span>
+                        </div>
+                        <div class="path-footer">
+                            <div class="path-meta">Upside <span>Unlimited 🚀</span></div>
+                            <div class="path-arrow">→</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- CIVIL -->
+            <div class="branch-group" id="civil" data-branch="civil">
+                <div class="branch-group-header">
+                    <span class="branch-emoji-lg">🏗️</span>
+                    <span class="branch-group-title">Civil Engineering</span>
+                    <span class="branch-group-count">4 paths</span>
+                </div>
+                <div class="paths-grid">
+                    <div class="path-card" style="--card-accent-a:#ff6b35;--card-accent-b:#a855f7" data-branch="civil" data-tags="construction site cad structural civil" onclick="openModal('civil_core')">
+                        <div class="path-card-top">
+                            <div class="path-icon fi-orange">🏗️</div>
+                            <span class="path-badge badge-core">🔩 Core</span>
+                        </div>
+                        <div class="path-name">Core Civil / Construction</div>
+                        <div class="path-desc">Work on site execution, project management, and structural design. Standard entry for civil grads.</div>
+                        <div class="path-tags">
+                            <span class="path-tag">AutoCAD</span><span class="path-tag">STAAD Pro</span><span class="path-tag">Project Mgmt</span>
+                        </div>
+                        <div class="path-footer">
+                            <div class="path-meta">Avg. CTC <span>₹3–8 LPA</span></div>
+                            <div class="path-arrow">→</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CORE / OTHER -->
+            <div class="branch-group" id="core" data-branch="core">
+                <div class="branch-group-header">
+                    <span class="branch-emoji-lg">🔬</span>
+                    <span class="branch-group-title">Core / Other</span>
+                    <span class="branch-group-count">2 paths</span>
+                </div>
+                <div class="paths-grid">
+                    <div class="path-card" style="--card-accent-a:#3d7fff;--card-accent-b:#00e5b0" data-branch="core" data-tags="chemical biotech aerospace materials core" onclick="openModal('r_and_d')">
+                        <div class="path-card-top">
+                            <div class="path-icon fi-blue">🔬</div>
+                            <span class="path-badge badge-top">⭐ Top</span>
+                        </div>
+                        <div class="path-name">Research & Development</div>
+                        <div class="path-desc">Specialized roles in manufacturing, pharmaceuticals, aerospace, and energy sectors.</div>
+                        <div class="path-tags">
+                            <span class="path-tag">Core Lab</span><span class="path-tag">Simulations</span><span class="path-tag">Analysis</span>
+                        </div>
+                        <div class="path-footer">
+                            <div class="path-meta">Avg. CTC <span>₹5–12 LPA</span></div>
+                            <div class="path-arrow">→</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- end paths-section -->
+    </div><!-- end main-wrap -->
+
+    <!-- ─── MODAL ─── -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModalOnBg(event)">
+        <div class="modal" id="modal">
+            <div class="modal-header">
+                <div class="modal-title-group">
+                    <div class="path-icon fi-blue" id="modal-icon"
+                        style="width:40px;height:40px;border-radius:10px;font-size:1.2rem">💻</div>
+                    <div>
+                        <div class="modal-path-title" id="modal-title">Path Title</div>
+                        <div class="modal-path-sub" id="modal-sub">Branch · Level</div>
+                    </div>
+                </div>
+                <button class="modal-close" onclick="closeModal()">✕</button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- injected by JS -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* ─── THEME TOGGLE ─── */
+        function toggleTheme() {
+            const html = document.documentElement;
+            const knob = document.getElementById('toggle-knob');
+            if (html.getAttribute('data-theme') === 'dark') {
+                html.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+                if(knob) knob.textContent = '🌙';
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                if(knob) knob.textContent = '☀️';
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const knob = document.getElementById('toggle-knob');
+            const theme = document.documentElement.getAttribute('data-theme');
+            if (knob) knob.textContent = theme === 'dark' ? '☀️' : '🌙';
+        });
+
+        /* ─── FILTER BY BRANCH ─── */
+        function filterBranch(branch, btn) {
+            document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.branch-group').forEach(g => {
+                if (branch === 'all' || g.dataset.branch === branch) {
+                    g.style.display = '';
+                } else {
+                    g.style.display = 'none';
+                }
+            });
+        }
+
+        /* ─── SEARCH ─── */
+        function filterSearch(val) {
+            const q = val.toLowerCase().trim();
+            document.querySelectorAll('.path-card').forEach(card => {
+                const text = (card.dataset.tags + ' ' + card.innerText).toLowerCase();
+                card.style.display = (!q || text.includes(q)) ? '' : 'none';
+            });
+            document.querySelectorAll('.branch-group').forEach(g => {
+                const visible = [...g.querySelectorAll('.path-card')].some(c => c.style.display !== 'none');
+                g.style.display = visible ? '' : 'none';
+            });
+        }
+
+        /* ─── MODAL DATA ─── */
+        const modals = {
+            sde: {
+                icon: '👨‍💻', title: 'Software Development', sub: 'CSE / IT · High Demand',
+                iconClass: 'fi-blue',
+                salary: [{ r: '₹5–10L', l: 'Fresher' }, { r: '₹12–25L', l: '2–4 yrs' }, { r: '₹25L+', l: 'Senior' }],
+                roadmap: [
+                    { year: 'Year 1', color: '#3d7fff', heading: 'Build Foundations', items: ['Learn C++/Python from scratch', 'Basic data structures: arrays, linked lists, stacks', 'Start competitive programming on Codeforces / LeetCode'] },
+                    { year: 'Year 2', color: '#00e5b0', heading: 'Core CS + Projects', items: ['DBMS, OS, Computer Networks fundamentals', 'Build 2 full-stack projects (React + Node or Django)', 'Target internships on Internshala / LinkedIn'] },
+                    { year: 'Year 3', color: '#a855f7', heading: 'Internship + SDE Prep', items: ['Land a Summer Internship at a product company', 'Solve 200+ LeetCode problems (focus on Medium/Hard)', 'Study System Design basics: load balancers, caching, DBs'] },
+                    { year: 'Year 4', color: '#ff6b35', heading: 'Placement Ready', items: ['Crack on-campus SDE interviews (Big 4, unicorns, MNCs)', 'Prepare HR + behavioural rounds', 'Keep GitHub active with open-source contributions'] },
+                ],
+                skills: ['DSA', 'C++', 'Python', 'JavaScript', 'React', 'Node.js', 'SQL', 'Git', 'System Design', 'OS', 'DBMS', 'Linux'],
+                resources: [
+                    { icon: '📘', name: 'Striver SDE Sheet', type: 'DSA Practice · Free', url: '#' },
+                    { icon: '🎥', name: 'CS50 by Harvard', type: 'Course · edX · Free', url: '#' },
+                    { icon: '🧑‍💻', name: 'LeetCode 75', type: 'Problem List · Free', url: '#' },
+                    { icon: '📗', name: 'System Design Primer', type: 'GitHub Resource · Free', url: '#' },
+                ]
+            },
+            ds: {
+                icon: '📊', title: 'Data Science & ML', sub: 'CSE / IT · Rising Fast',
+                iconClass: 'fi-green',
+                salary: [{ r: '₹6–12L', l: 'Fresher' }, { r: '₹15–30L', l: '2–4 yrs' }, { r: '₹30L+', l: 'Senior' }],
+                roadmap: [
+                    { year: 'Year 1–2', color: '#00e5b0', heading: 'Python & Math', items: ['Learn Python: NumPy, Pandas, Matplotlib', 'Statistics: probability, distributions, hypothesis testing', 'Linear Algebra and Calculus basics for ML'] },
+                    { year: 'Year 2–3', color: '#3d7fff', heading: 'ML & Projects', items: ['Supervised & unsupervised ML: sklearn, XGBoost', 'Build 2–3 end-to-end data science projects', 'Kaggle competitions for hands-on experience'] },
+                    { year: 'Year 3–4', color: '#a855f7', heading: 'Deep Learning & Internship', items: ['Deep learning: CNNs, RNNs, Transformers (PyTorch)', 'Land a data science or ML engineering internship', 'Learn MLOps: model deployment with FastAPI, Docker'] },
+                ],
+                skills: ['Python', 'SQL', 'Pandas', 'NumPy', 'Scikit-learn', 'PyTorch', 'Statistics', 'Tableau', 'TensorFlow', 'MLOps'],
+                resources: [
+                    { icon: '📘', name: 'fast.ai Deep Learning', type: 'Course · Free', url: '#' },
+                    { icon: '🎥', name: 'Kaggle Learn', type: 'Micro-courses · Free', url: '#' },
+                    { icon: '📗', name: 'Hands-On ML (Géron)', type: 'Book · O\'Reilly', url: '#' },
+                ]
+            },
+            vlsi: {
+                icon: '🔬', title: 'VLSI & Chip Design', sub: 'ECE / EEE · High Value Niche',
+                iconClass: 'fi-blue',
+                salary: [{ r: '₹5–9L', l: 'Fresher' }, { r: '₹10–22L', l: '2–4 yrs' }, { r: '₹22L+', l: 'Senior' }],
+                roadmap: [
+                    { year: 'Year 1–2', color: '#3d7fff', heading: 'Electronics Foundations', items: ['Digital electronics, logic design, number systems', 'Analog circuits: op-amps, MOSFETs, BJTs', 'MATLAB and Cadence simulation basics'] },
+                    { year: 'Year 3', color: '#00e5b0', heading: 'Verilog & RTL Design', items: ['Learn Verilog / SystemVerilog HDL', 'RTL design and simulation using ModelSim/Cadence', 'Understand ASIC/FPGA design flows'] },
+                    { year: 'Year 4', color: '#a855f7', heading: 'Internship & Placement', items: ['Apply to Qualcomm, MediaTek, Intel, Texas Instruments', 'Practice digital design interview questions', 'Explore M.Tech (VLSI) at IITs via GATE'] },
+                ],
+                skills: ['Verilog', 'VHDL', 'SystemVerilog', 'Cadence', 'MATLAB', 'Digital Design', 'FPGA', 'DFT', 'Timing Analysis'],
+                resources: [
+                    { icon: '📘', name: 'NPTEL VLSI Design', type: 'Course · Free · IIT Kharagpur', url: '#' },
+                    { icon: '🎥', name: 'Udemy Verilog Bootcamp', type: 'Course · Paid', url: '#' },
+                    { icon: '📗', name: 'Digital Design – Morris Mano', type: 'Textbook', url: '#' },
+                ]
+            },
+            ml_eng: {
+                icon: '🧠', title: 'ML / AI Engineer', sub: 'AI & DS · Most In-Demand',
+                iconClass: 'fi-green',
+                salary: [{ r: '₹8–15L', l: 'Fresher' }, { r: '₹18–40L', l: '2–4 yrs' }, { r: '₹40L+', l: 'Senior' }],
+                roadmap: [
+                    { year: 'Year 1–2', color: '#00e5b0', heading: 'Math & Python', items: ['Linear algebra, probability, calculus for ML', 'Python: NumPy, Pandas, Matplotlib', 'Basic ML with sklearn'] },
+                    { year: 'Year 2–3', color: '#3d7fff', heading: 'Deep Learning', items: ['CNNs, RNNs, Transformers with PyTorch', 'NLP: tokenization, BERT, fine-tuning LLMs', 'Computer Vision: YOLO, Stable Diffusion basics'] },
+                    { year: 'Year 3–4', color: '#a855f7', heading: 'MLOps & Deployment', items: ['Model deployment: FastAPI, Docker, Kubernetes', 'ML monitoring, data pipelines, feature stores', 'Contribute to open-source AI projects; build portfolio'] },
+                ],
+                skills: ['Python', 'PyTorch', 'HuggingFace', 'LLMs', 'MLOps', 'Docker', 'FastAPI', 'Statistics', 'SQL', 'Spark'],
+                resources: [
+                    { icon: '📘', name: 'DeepLearning.AI Specialization', type: 'Course · Coursera', url: '#' },
+                    { icon: '🎥', name: 'Andrej Karpathy YouTube', type: 'Free Videos', url: '#' },
+                    { icon: '📗', name: 'LLM Engineering (HuggingFace)', type: 'Course · Free', url: '#' },
+                ]
+            },
+            devops: {
+                icon: '☁️', title: 'DevOps & Cloud', sub: 'CSE / IT · High Demand',
+                iconClass: 'fi-purple',
+                salary: [{ r: '₹6–12L', l: 'Fresher' }, { r: '₹14–25L', l: '2–4 yrs' }, { r: '₹25L+', l: 'Senior' }],
+                roadmap: [
+                    { year: 'Year 1–2', color: '#3d7fff', heading: 'Linux & Scripting', items: ['Master Linux commands, bash scripting, file systems', 'Learn networking basics (TCP/IP, DNS, HTTP)', 'Python or Go for scripting automation'] },
+                    { year: 'Year 3', color: '#00e5b0', heading: 'Cloud & Containers', items: ['Learn AWS/Azure basics (EC2, S3, IAM, VPC)', 'Master Docker for containerization', 'Start using Git/GitHub heavily'] },
+                    { year: 'Year 4', color: '#a855f7', heading: 'CI/CD & Orchestration', items: ['Learn Jenkins or GitHub Actions for CI/CD', 'Introduction to Kubernetes (K8s)', 'Learn Terraform for Infrastructure as Code (IaC)'] },
+                ],
+                skills: ['Linux', 'AWS', 'Docker', 'Kubernetes', 'CI/CD', 'Jenkins', 'Terraform', 'Bash', 'Python', 'Networking'],
+                resources: [
+                    { icon: '📘', name: 'DevOps Roadmap', type: 'roadmap.sh · Free', url: '#' },
+                    { icon: '🎥', name: 'Nana DevOps Bootcamp', type: 'YouTube · Free', url: '#' },
+                    { icon: '📗', name: 'AWS Certified Solutions Architect', type: 'Certification', url: '#' },
+                ]
+            },
+            cyber: {
+                icon: '🔐', title: 'Cybersecurity', sub: 'CSE / IT · High Growth',
+                iconClass: 'fi-orange',
+                salary: [{ r: '₹5–10L', l: 'Fresher' }, { r: '₹12–20L', l: '2–4 yrs' }, { r: '₹20L+', l: 'Senior' }],
+                roadmap: [
+                    { year: 'Year 1–2', color: '#ff6b35', heading: 'Networks & Systems', items: ['Deep dive into OS (Linux, Windows internals)', 'Master networking protocols (TCP/IP, OSI model)', 'Learn basic programming (Python, C)'] },
+                    { year: 'Year 3', color: '#3d7fff', heading: 'Security Fundamentals', items: ['Learn web vulnerabilities (OWASP Top 10)', 'Practice on TryHackMe or HackTheBox', 'Understand cryptography basics'] },
+                    { year: 'Year 4', color: '#00e5b0', heading: 'Specialization & Certs', items: ['Prepare for CEH or Security+ certifications', 'Participate in CTF competitions', 'Apply for SOC analyst or penetration testing internships'] },
+                ],
+                skills: ['Linux', 'Networking', 'Python', 'Web Security', 'Burp Suite', 'Wireshark', 'Cryptography', 'Risk Analysis'],
+                resources: [
+                    { icon: '📘', name: 'TryHackMe Learning Paths', type: 'Platform · Freemium', url: '#' },
+                    { icon: '🎥', name: 'NetworkChuck', type: 'YouTube · Free', url: '#' },
+                    { icon: '📗', name: 'CompTIA Security+', type: 'Certification', url: '#' },
+                ]
+            },
+            pm: {
+                icon: '🧭', title: 'Product Management', sub: 'CSE / IT · Business Tech',
+                iconClass: 'fi-blue',
+                salary: [{ r: '₹8–15L', l: 'APM' }, { r: '₹18–35L', l: 'PM' }, { r: '₹35L+', l: 'Senior PM' }],
+                roadmap: [
+                    { year: 'Year 1–2', color: '#3d7fff', heading: 'Tech & User Context', items: ['Build basic coding projects to understand software lifecycles', 'Engage in college clubs to build leadership skills', 'Start reading about UI/UX principles'] },
+                    { year: 'Year 3', color: '#ff6b35', heading: 'Business & Analytics', items: ['Learn SQL and data analytics (Tableau/Excel)', 'Read case studies, write product teardowns', 'Learn Agile & Scrum frameworks'] },
+                    { year: 'Year 4', color: '#a855f7', heading: 'APM Preparation', items: ['Prepare for APM (Associate Product Manager) programs', 'Do product teardowns and build a portfolio', 'Practice product case interviews'] },
+                ],
+                skills: ['Product Strategy', 'Agile/Scrum', 'Data Analysis', 'SQL', 'UI/UX', 'Wireframing', 'Market Research', 'Communication'],
+                resources: [
+                    { icon: '📘', name: 'Cracking the PM Interview', type: 'Book', url: '#' },
+                    { icon: '🎥', name: 'Product School', type: 'YouTube · Free', url: '#' },
+                    { icon: '📗', name: 'Exponent PM Interviews', type: 'Platform · Freemium', url: '#' },
+                ]
+            },
+            ms: {
+                icon: '🎓', title: 'MS Abroad (CS)', sub: 'CSE / IT · Higher Ed',
+                iconClass: 'fi-green',
+                salary: [{ r: '$80K-$100K', l: 'Fresher' }, { r: '$120K-$180K', l: 'Mid-Level' }, { r: '$200K+', l: 'Senior' }],
+                roadmap: [
+                    { year: 'Year 1–2', color: '#00e5b0', heading: 'GPA & Foundations', items: ['Maintain a high CGPA (8.5+ is ideal)', 'Build solid fundamentals in core CS subjects', 'Explore specific interests (AI, Systems, Security)'] },
+                    { year: 'Year 3', color: '#ff6b35', heading: 'Research & Profile', items: ['Engage in research under a professor; aim for a publication', 'Start preparing for the GRE exam', 'Shortlist universities based on research alignment'] },
+                    { year: 'Year 4', color: '#3d7fff', heading: 'Applications', items: ['Take GRE and TOEFL/IELTS by August/September', 'Draft Statement of Purpose (SOP) and request LORs', 'Submit applications by Nov-Jan'] },
+                ],
+                skills: ['CGPA', 'GRE/TOEFL', 'Research Papers', 'SOP Writing', 'Networking', 'Core CS Subjects', 'Project Portfolio'],
+                resources: [
+                    { icon: '📘', name: 'Yocket', type: 'Community & Tools', url: '#' },
+                    { icon: '🎥', name: 'GregMat for GRE', type: 'Course · Paid', url: '#' },
+                    { icon: '📗', name: 'University Subreddits', type: 'Community · Free', url: '#' },
+                ]
+            },
+            embedded: {
+                icon: '🤖', title: 'Embedded & IoT', sub: 'ECE / EEE · Hardware & Software',
+                iconClass: 'fi-orange',
+                salary: [{ r: '₹4–8L', l: 'Fresher' }, { r: '₹10–18L', l: '2–4 yrs' }, { r: '₹18L+', l: 'Senior' }],
+                roadmap: [
+                    { year: 'Year 1–2', color: '#ff6b35', heading: 'C/C++ & Electronics', items: ['Master C and C++ programming (pointers, memory management)', 'Understand basic electronics and microprocessors', 'Play with Arduino or Raspberry Pi boards'] },
+                    { year: 'Year 3', color: '#3d7fff', heading: 'Microcontrollers', items: ['Learn bare-metal programming on ARM Cortex-M or PIC', 'Study communication protocols (I2C, SPI, UART)', 'Learn real-time operating systems (RTOS) basics'] },
+                    { year: 'Year 4', color: '#00e5b0', heading: 'IoT & Projects', items: ['Integrate Wi-Fi/Bluetooth modules (ESP32)', 'Learn IoT protocols like MQTT', 'Build end-to-end hardware-software projects'] },
+                ],
+                skills: ['C/C++', 'Microcontrollers', 'RTOS', 'I2C/SPI/UART', 'Linux', 'PCB Design Basics', 'IoT', 'Python'],
+                resources: [
+                    { icon: '📘', name: 'Fastbit Embedded Brain Academy', type: 'Udemy Courses', url: '#' },
+                    { icon: '🎥', name: 'Ben Eater', type: 'YouTube · Free', url: '#' },
+                    { icon: '📗', name: 'Making Embedded Systems', type: 'Book · O\'Reilly', url: '#' },
+                ]
+            },
+            telecom: {
+                icon: '📶', title: 'Telecom & 5G', sub: 'ECE / EEE · Core',
+                iconClass: 'fi-purple',
+                salary: [{ r: '₹5–9L', l: 'Fresher' }, { r: '₹12–20L', l: '2–4 yrs' }, { r: '₹20L+', l: 'Senior' }],
+                roadmap: [
+                    { year: 'Year 1–2', color: '#a855f7', heading: 'Signals & Systems', items: ['Master Signals and Systems, Analog/Digital Communications', 'Learn MATLAB or Python for signal processing simulations', 'Understand electromagnetics and antennas'] },
+                    { year: 'Year 3', color: '#00e5b0', heading: 'Wireless & Networks', items: ['Study wireless communication principles', 'Learn about cellular networks (4G LTE architecture)', 'Deep dive into Digital Signal Processing (DSP)'] },
+                    { year: 'Year 4', color: '#3d7fff', heading: '5G & Specialization', items: ['Understand 5G NR, Massive MIMO, and OFDM', 'Seek internships at companies like Ericsson, Nokia, Jio', 'Learn basic cloud & networking (SDN/NFV)'] },
+                ],
+                skills: ['Signal Processing', 'MATLAB', 'Wireless Comms', '5G NR', 'DSP', 'Antenna Design', 'Networking', 'Python'],
+                resources: [
+                    { icon: '📘', name: 'NPTEL Communications Engineering', type: 'Course · Free', url: '#' },
+                    { icon: '🎥', name: 'Telecom Training Channels', type: 'YouTube', url: '#' },
+                    { icon: '📗', name: 'Wireless Communications by Andrea Goldsmith', type: 'Book', url: '#' },
+                ]
+            },
+            gate_ece: {
+                icon: '📋', title: 'GATE & PSUs (ECE)', sub: 'ECE / EEE · Govt Jobs',
+                iconClass: 'fi-green',
+                salary: [{ r: '₹8–16L', l: 'PSU Fresher' }, { r: '₹14–22L', l: 'Mid-Level' }, { r: 'IIT Placement', l: 'Post-MTech' }],
+                roadmap: [
+                    { year: 'Year 1–2', color: '#00e5b0', heading: 'Base Subjects', items: ['Focus on Engineering Math and Aptitude', 'Master Network Theory and Digital Circuits', 'Take solid university notes for core subjects'] },
+                    { year: 'Year 3', color: '#ff6b35', heading: 'Heavy Core Prep', items: ['Deep dive into Signals & Systems, Control Systems', 'Study Electronic Devices, Analog Circuits, Communications', 'Start solving previous year GATE questions (PYQs)'] },
+                    { year: 'Year 4', color: '#3d7fff', heading: 'Mock Tests & Revision', items: ['Enroll in a mock test series (Made Easy/Ace)', 'Revise electromagnetics and remaining topics', 'Take GATE exam in February'] },
+                ],
+                skills: ['Network Theory', 'Control Systems', 'Digital Electronics', 'Analog Circuits', 'Signals & Systems', 'Electromagnetics', 'Aptitude'],
+                resources: [
+                    { icon: '📘', name: 'Made Easy Handbooks', type: 'Books', url: '#' },
+                    { icon: '🎥', name: 'Kreatryx / Unacademy ECE', type: 'YouTube', url: '#' },
+                    { icon: '📗', name: 'GATE PYQ Books', type: 'Practice Material', url: '#' },
+                ]
+            },
+            core_mech: {
+                icon: '🔧', title: 'Core Manufacturing', sub: 'Mechanical · Industry',
+                iconClass: 'fi-orange',
+                salary: [{ r: '₹3–6L', l: 'GET' }, { r: '₹8–14L', l: '3–5 yrs' }, { r: '₹15L+', l: 'Manager' }],
+                roadmap: [
+                    { year: 'Year 1–2', color: '#ff6b35', heading: 'Mechanics & CAD', items: ['Master Engineering Mechanics, Strength of Materials', 'Get proficient in 2D/3D CAD (AutoCAD, SolidWorks, CATIA)', 'Understand Thermodynamics and Fluid Mechanics'] },
+                    { year: 'Year 3', color: '#3d7fff', heading: 'Design & Analysis', items: ['Learn Finite Element Analysis (FEA) basics (ANSYS)', 'Study manufacturing processes and materials science', 'Participate in club projects (e.g., Baja SAE, Formula Student)'] },
+                    { year: 'Year 4', color: '#00e5b0', heading: 'Industry Readiness', items: ['Learn GD&T (Geometric Dimensioning and Tolerancing)', 'Target internships in automotive or manufacturing firms', 'Prepare for core technical interviews'] },
+                ],
+                skills: ['SolidWorks / CATIA', 'AutoCAD', 'ANSYS', 'GD&T', 'Strength of Materials', 'Thermodynamics', 'Manufacturing Processes'],
+                resources: [
+                    { icon: '📘', name: 'SolidWorks Tutorials', type: 'Software Training', url: '#' },
+                    { icon: '🎥', name: 'Engineering Mindset', type: 'YouTube · Free', url: '#' },
+                    { icon: '📗', name: 'NPTEL Mechanical Engineering', type: 'Course · Free', url: '#' },
+                ]
+            },
+            mech_sw: {
+                icon: '💡', title: 'Software (via Mech)', sub: 'Mechanical · Career Pivot',
+                iconClass: 'fi-blue',
+                salary: [{ r: '₹5–10L', l: 'Fresher' }, { r: '₹12–25L', l: '2–4 yrs' }, { r: '₹25L+', l: 'Senior' }],
+                roadmap: [
+                    { year: 'Year 1–2', color: '#3d7fff', heading: 'Intro to Coding', items: ['Maintain decent CGPA in Mech while exploring tech', 'Learn Python or C++ fundamentals', 'Take generic open electives in CS if available'] },
+                    { year: 'Year 3', color: '#a855f7', heading: 'DSA & Projects', items: ['Master Data Structures & Algorithms', 'Start practicing on LeetCode / GeeksforGeeks', 'Build 2 solid software projects (Web, App, or ML)'] },
+                    { year: 'Year 4', color: '#ff6b35', heading: 'Applying & Interviewing', items: ['Prepare CS fundamentals: OOPs, DBMS, OS', 'Target off-campus placements and service-based companies initially', 'Leverage coding platforms and hackathons'] },
+                ],
+                skills: ['DSA', 'Python/C++', 'Web Development', 'SQL', 'Git', 'OOPs', 'DBMS Basics'],
+                resources: [
+                    { icon: '📘', name: 'Striver SDE Sheet', type: 'DSA Practice', url: '#' },
+                    { icon: '🎥', name: 'FreeCodeCamp / CodeWithHarry', type: 'YouTube', url: '#' },
+                    { icon: '📗', name: 'LeetCode', type: 'Platform', url: '#' },
+                ]
+            },
+            gate_mech: {
+                icon: '📋', title: 'GATE & M.Tech', sub: 'Mechanical · Core Govt.',
+                iconClass: 'fi-green',
+                salary: [{ r: '₹9–16L', l: 'PSU' }, { r: '₹12–20L', l: 'Core Design' }, { r: '₹20L+', l: 'Senior R&D' }],
+                roadmap: [
+                    { year: 'Year 1–2', color: '#00e5b0', heading: 'Math & Basic Core', items: ['Build strong foundation in Engineering Math', 'Master SOM, Thermodynamics, and Fluid Mechanics', 'Keep short notes for easy revision'] },
+                    { year: 'Year 3', color: '#ff6b35', heading: 'Advanced Subjects', items: ['Study Theory of Machines, Machine Design', 'Cover Heat Transfer and Manufacturing Technology', 'Start solving topic-wise PYQs'] },
+                    { year: 'Year 4', color: '#3d7fff', heading: 'Test Series', items: ['Join a reputed GATE mock test series', 'Focus on time management and calculator usage', 'Aim for <500 rank for PSU, <1000 for top IITs'] },
+                ],
+                skills: ['Thermodynamics', 'Fluid Mechanics', 'SOM', 'Theory of Machines', 'Heat Transfer', 'Manufacturing', 'Math & Aptitude'],
+                resources: [
+                    { icon: '📘', name: 'Made Easy Objective Book', type: 'Question Bank', url: '#' },
+                    { icon: '🎥', name: 'Unacademy / Exergic', type: 'GATE Channels', url: '#' },
+                    { icon: '📗', name: 'GATE Virtual Calculator', type: 'Practice Tool', url: '#' },
+                ]
+            },
+            mba_mech: {
+                icon: '📈', title: 'MBA & Consulting', sub: 'Mechanical · Business Pivot',
+                iconClass: 'fi-purple',
+                salary: [{ r: '₹12–25L', l: 'Post-MBA' }, { r: '₹25–40L', l: 'Manager' }, { r: '₹50L+', l: 'Partner/Director' }],
+                roadmap: [
+                    { year: 'Year 1–2', color: '#a855f7', heading: 'Profile Building', items: ['Maintain high CGPA (helps in MBA admissions)', 'Take up leadership roles in college fests/clubs', 'Engage in extracurriculars, sports, or NGOs'] },
+                    { year: 'Year 3', color: '#ff6b35', heading: 'Internships & CAT Prep', items: ['Start CAT preparation (Quants, DILR, VARC)', 'Do internships in operations, marketing, or tech', 'Read business news systematically (Mint, ET)'] },
+                    { year: 'Year 4', color: '#3d7fff', heading: 'Exams & Interviews', items: ['Write CAT, XAT, GMAT in final year', 'Prepare for GD-PI processes', 'Consider gaining 1-2 years work ex if not selected right away'] },
+                ],
+                skills: ['Quantitative Aptitude', 'DILR', 'Verbal Ability', 'Leadership', 'Communication', 'Case Analysis', 'Business Acumen'],
+                resources: [
+                    { icon: '📘', name: 'Arun Sharma Books', type: 'CAT Prep', url: '#' },
+                    { icon: '🎥', name: 'InsideIIM', type: 'MBA Insights', url: '#' },
+                    { icon: '📗', name: 'TIME / IMS Test Series', type: 'Mock Tests', url: '#' },
+                ]
+            },
+            da: {
+                icon: '📉', title: 'Data Analyst', sub: 'AI & DS · Insights',
+                iconClass: 'fi-blue',
+                salary: [{ r: '₹5–9L', l: 'Fresher' }, { r: '₹10–18L', l: '2–4 yrs' }, { r: '₹20L+', l: 'Senior' }],
+                roadmap: [
+                    { year: 'Year 1–2', color: '#3d7fff', heading: 'Excel & Databases', items: ['Master Advanced Excel (Pivot tables, VLOOKUP, Macros)', 'Learn SQL inside out (Joins, Window functions, Subqueries)', 'Basic Statistics for analysis'] },
+                    { year: 'Year 3', color: '#00e5b0', heading: 'Python & BI Tools', items: ['Learn Python (Pandas, Matplotlib, Seaborn)', 'Master a BI tool: Tableau or PowerBI', 'Build data visualization dashboards'] },
+                    { year: 'Year 4', color: '#ff6b35', heading: 'Projects & Case Studies', items: ['Create a portfolio evaluating real-world datasets (Kaggle)', 'Learn basic machine learning concepts', 'Apply for Data Analyst / Business Analyst roles'] },
+                ],
+                skills: ['SQL', 'Excel', 'Tableau / PowerBI', 'Python', 'Pandas', 'Data Visualization', 'Statistics', 'Storytelling'],
+                resources: [
+                    { icon: '📘', name: 'Google Data Analytics Certificate', type: 'Coursera', url: '#' },
+                    { icon: '🎥', name: 'Alex The Analyst', type: 'YouTube · Free', url: '#' },
+                    { icon: '📗', name: 'Kaggle Datasets', type: 'Practice', url: '#' },
+                ]
+            },
+            research: {
+                icon: '🔭', title: 'AI Research & PhD', sub: 'AI & DS · Academia/R&D',
+                iconClass: 'fi-purple',
+                salary: [{ r: '$30K–45K/yr', l: 'PhD Stipend' }, { r: '₹15–25L', l: 'R&D Fresher' }, { r: '$$$', l: 'Industry Scientist' }],
+                roadmap: [
+                    { year: 'Year 1–2', color: '#a855f7', heading: 'Math & ML Core', items: ['Deep dive into Linear Algebra, Calculus, Probability', 'Master foundational ML algorithms mathematically', 'Maintain extremely high CGPA'] },
+                    { year: 'Year 3', color: '#3d7fff', heading: 'Research Assistantship', items: ['Work under professors on active AI/ML research projects', 'Deep Learning concepts and frameworks (PyTorch)', 'Aim for paper publications in conferences (NeurIPS, CVPR)'] },
+                    { year: 'Year 4', color: '#00e5b0', heading: 'Applications', items: ['Prepare for GRE / TOEFL', 'Write a compelling research SOP', 'Apply to thesis-based MS programs or direct PhDs abroad'] },
+                ],
+                skills: ['Mathematics', 'PyTorch', 'Research Writing', 'Algorithm Design', 'Deep Learning', 'Experimentation', 'Literature Review'],
+                resources: [
+                    { icon: '📘', name: 'ArXiv', type: 'Research Papers', url: '#' },
+                    { icon: '🎥', name: 'Stanford CS229 / CS231n', type: 'Free Lectures', url: '#' },
+                    { icon: '📗', name: 'Pattern Recognition by Bishop', type: 'Core Book', url: '#' },
+                ]
+            },
+            startup: {
+                icon: '🚀', title: 'AI Startup Builder', sub: 'AI & DS · Entrepreneurship',
+                iconClass: 'fi-orange',
+                salary: [{ r: '₹0–???', l: 'Early Stage' }, { r: 'Funding', l: 'Seed' }, { r: 'Unlimited', l: 'Exit' }],
+                roadmap: [
+                    { year: 'Year 1–2', color: '#ff6b35', heading: 'Full-stack & AI APIs', items: ['Learn full-stack development (React/Next.js + Node)', 'Experiment with integrating OpenAI, Anthropic, HuggingFace APIs', 'Participate in hackathons constantly'] },
+                    { year: 'Year 3', color: '#3d7fff', heading: 'Product & Prototyping', items: ['Identify real-world problems and build rapid MVPs', 'Learn LLM orchestration (LangChain, LlamaIndex)', 'Start talking to potential early users'] },
+                    { year: 'Year 4', color: '#00e5b0', heading: 'Launch & Iterate', items: ['Launch products on ProductHunt / Twitter', 'Learn basics of marketing, sales, and fundraising', 'Apply to incubators like Y-Combinator or local centers'] },
+                ],
+                skills: ['Full-stack Dev', 'AI APIs', 'Prompt Engineering', 'Product Management', 'Marketing', 'Pitching', 'Fast Execution'],
+                resources: [
+                    { icon: '📘', name: 'Y-Combinator Startup School', type: 'Course · Free', url: '#' },
+                    { icon: '🎥', name: 'Buildspace', type: 'Community', url: '#' },
+                    { icon: '📗', name: 'The Lean Startup', type: 'Book', url: '#' },
+                ]
+            },
+            civil_core: {
+                icon: '🏗️', title: 'Core Civil', sub: 'Civil · Industry Execution',
+                iconClass: 'fi-orange',
+                salary: [{ r: '₹3–6L', l: 'Site Engg' }, { r: '₹7–12L', l: '3–5 yrs' }, { r: '₹15L+', l: 'Project Mgr' }],
+                roadmap: [
+                    { year: 'Year 1–2', color: '#ff6b35', heading: 'Foundations & CAD', items: ['Master Mechanics of Solids, Fluid Mechanics', 'Learn AutoCAD for technical drawing', 'Understand basic construction materials and surveying'] },
+                    { year: 'Year 3', color: '#3d7fff', heading: 'Structural & Software', items: ['Learn design software (STAAD Pro or ETABS)', 'Study structural engineering, geotechnical engineering', 'Secure a site internship (very important in civil)'] },
+                    { year: 'Year 4', color: '#00e5b0', heading: 'Project Management', items: ['Learn project management tools (Primavera P6, MS Project)', 'Understand estimation and costing', 'Prepare for campus placements or apply to mega-contractors (L&T)'] },
+                ],
+                skills: ['AutoCAD', 'STAAD Pro', 'ETABS', 'Primavera', 'Site Management', 'Estimation', 'Surveying'],
+                resources: [
+                    { icon: '📘', name: 'NPTEL Civil Courses', type: 'Lectures', url: '#' },
+                    { icon: '🎥', name: 'Civil Engineering Tutorials', type: 'YouTube', url: '#' },
+                    { icon: '📗', name: 'IS Codes (IS 456)', type: 'Reference Manuals', url: '#' },
+                ]
+            },
+            r_and_d: {
+                icon: '🔬', title: 'Research & Development', sub: 'Core Branches · Innovation',
+                iconClass: 'fi-blue',
+                salary: [{ r: '₹5–9L', l: 'R&D Fresher' }, { r: '₹12–18L', l: 'Mid-Level' }, { r: '₹20L+', l: 'Scientist' }],
+                roadmap: [
+                    { year: 'Year 1–2', color: '#3d7fff', heading: 'Deep Core Concepts', items: ['Excel in your specific core branch subjects', 'Build strong analytical and mathematical skills', 'Start using simulation tools (MATLAB, ANSYS, COMSOL)'] },
+                    { year: 'Year 3', color: '#00e5b0', heading: 'Research Internships', items: ['Publish review papers or small experimental papers', 'Secure research internships at IITs, IISc, or govt labs (CSIR, DRDO)', 'Learn specialized software for your domain'] },
+                    { year: 'Year 4', color: '#a855f7', heading: 'Thesis & Progression', items: ['Complete a high-quality final year thesis project', 'Decide between joining industry R&D or pursuing a Master\'s/PhD', 'Prepare for technical interviews focusing heavily on your project'] },
+                ],
+                skills: ['Domain Expertise', 'Simulations', 'Data Analysis', 'Technical Writing', 'MATLAB / Python', 'Experimental Setup', 'Problem Solving'],
+                resources: [
+                    { icon: '📘', name: 'ResearchGate', type: 'Community & Papers', url: '#' },
+                    { icon: '🎥', name: 'ScienceDirect', type: 'Journals', url: '#' },
+                    { icon: '📗', name: 'NPTEL Advanced Courses', type: 'Lectures', url: '#' },
+                ]
+            }
+        };
+
+        /* ─── MODAL OPEN/CLOSE ─── */
+        function openModal(id) {
+            const data = modals[id];
+            if (!data) {
+                // Generic modal for paths without full data
+                document.getElementById('modal-title').textContent = 'Roadmap Coming Soon';
+                document.getElementById('modal-sub').textContent = 'We\'re building detailed content for this path.';
+                document.getElementById('modal-icon').textContent = '🔧';
+                document.getElementById('modal-body').innerHTML = `<p style="color:var(--muted);font-size:0.88rem;line-height:1.7">Detailed roadmap, skill list, and resources for this career path are being added. Check back soon or use the search to explore available paths.</p>`;
+                document.getElementById('modalOverlay').classList.add('open');
+                document.body.style.overflow = 'hidden';
+                return;
+            }
+
+            document.getElementById('modal-title').textContent = data.title;
+            document.getElementById('modal-sub').textContent = data.sub;
+            const iconEl = document.getElementById('modal-icon');
+            iconEl.textContent = data.icon;
+            iconEl.className = 'path-icon ' + data.iconClass;
+            iconEl.style.cssText = 'width:40px;height:40px;border-radius:10px;font-size:1.2rem;display:flex;align-items:center;justify-content:center;';
+
+            let html = '';
+
+            // Salary
+            html += `<div class="modal-section-title">Expected Salary</div>
+    <div class="modal-salary">
+      ${data.salary.map(s => `<div class="salary-box"><div class="salary-range">${s.r}</div><div class="salary-label">${s.l}</div></div>`).join('')}
+    </div>`;
+
+            // Roadmap
+            html += `<div class="modal-section-title">4-Year Journey Map</div>
+    <div class="roadmap-steps">
+      ${data.roadmap.map((step, i) => `
+        <div class="roadmap-step">
+          <div class="step-pin-wrap">
+            <div class="step-pin" style="background: linear-gradient(135deg, ${step.color}, ${step.color}aa);">
+               <div class="step-pin-inner"></div>
+            </div>
+          </div>
+          <div class="step-content" style="border-top: 3px solid ${step.color}">
+            <div class="step-year" style="color:${step.color}">${step.year}</div>
+            <div class="step-heading">${step.heading}</div>
+            <div class="step-items">
+              ${step.items.map(it => `<div class="step-item">${it}</div>`).join('')}
+            </div>
+          </div>
+        </div>
+      `).join('')}
+    </div>`;
+
+            // Skills
+            html += `<div class="modal-section-title">Key Skills to Learn</div>
+    <div class="skills-wrap">
+      ${data.skills.map(s => `<span class="skill-chip">${s}</span>`).join('')}
+    </div>`;
+
+            // Resources
+            html += `<div class="modal-section-title">Top Resources</div>
+    <div class="resource-list">
+      ${data.resources.map(r => `
+        <a href="${r.url}" class="resource-item">
+          <span class="resource-icon">${r.icon}</span>
+          <div class="resource-info">
+            <div class="resource-name">${r.name}</div>
+            <div class="resource-type">${r.type}</div>
+          </div>
+          <span class="resource-arrow">→</span>
+        </a>
+      `).join('')}
+    </div>`;
+
+            document.getElementById('modal-body').innerHTML = html;
+            document.getElementById('modalOverlay').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        function closeModalOnBg(e) {
+            if (e.target === document.getElementById('modalOverlay')) closeModal();
+        }
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+    </script>
+</body>
+
+</html>

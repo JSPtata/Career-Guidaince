@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Higher Studies — CareerCompass</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <style>
+        /* ─── THEME TOKENS ─── */
+        [data-theme="dark"] {
+            --bg: #0a0d14;
+            --surface: #111520;
+            --card: #161b2e;
+            --border: #1e2640;
+            --accent: #3d7fff;
+            --accent2: #00e5b0;
+            --accent3: #ff6b35;
+            --text: #c8cce0;
+            --muted: #6b7394;
+            --heading: #ffffff;
+            --nav-bg: rgba(10, 13, 20, 0.88);
+            --toggle-bg: #1e2640;
+            --shadow: rgba(0, 0, 0, 0.5);
+        }
+        [data-theme="light"] {
+            --bg: #f5f6fa;
+            --surface: #eceef6;
+            --card: #ffffff;
+            --border: #dde0ef;
+            --accent: #2563eb;
+            --accent2: #059669;
+            --accent3: #ea580c;
+            --text: #374151;
+            --muted: #6b7280;
+            --heading: #111827;
+            --nav-bg: rgba(245, 246, 250, 0.92);
+            --toggle-bg: #dde0ef;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Space Grotesk', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; transition: background 0.35s, color 0.35s; }
+
+        /* ─── NAV ─── */
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1rem 5vw; background: var(--nav-bg); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+        .nav-logo { font-family: 'Space Mono', monospace; font-weight: 700; font-size: 1.2rem; color: var(--heading); letter-spacing: -0.5px; text-decoration: none;}
+        .nav-logo span { color: var(--accent); }
+        .nav-center { display: flex; gap: 2rem; list-style: none; }
+        .nav-center a { font-family: 'Space Mono', monospace; font-size: 0.78rem; font-weight: 400; color: var(--muted); text-decoration: none; letter-spacing: 0.3px; transition: color 0.2s; }
+        .nav-center a:hover, .nav-center a.active { color: var(--accent); }
+        .nav-right { display: flex; align-items: center; gap: 0.9rem; }
+        
+        .theme-toggle { width: 44px; height: 24px; background: var(--toggle-bg); border: 1px solid var(--border); border-radius: 100px; cursor: pointer; display: flex; align-items: center; padding: 3px; position: relative; }
+        .toggle-knob { width: 18px; height: 18px; border-radius: 50%; background: var(--accent); transition: transform 0.3s; display: flex; align-items: center; justify-content: center; font-size: 10px; }
+        [data-theme="light"] .toggle-knob { transform: translateX(20px); }
+        .nav-cta { background: var(--accent); color: #fff; text-decoration:none; padding: 0.5rem 1.2rem; border-radius: 6px; font-family: 'Space Mono', monospace; font-size: 0.75rem; }
+
+        /* ─── PAGE HEADER ─── */
+        .page-header { padding: 7.5rem 5vw 3rem; text-align: center; position: relative; overflow: hidden; }
+        .page-header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 50px 50px; mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%); opacity: 0.35; }
+        .page-label { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 2.5px; text-transform: uppercase; color: #a855f7; margin-bottom: 0.9rem; position: relative; z-index: 2; }
+        .page-title { font-family: 'Space Mono', monospace; font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 700; color: var(--heading); letter-spacing: -1px; line-height: 1.1; margin-bottom: 1rem; position: relative; z-index: 2; }
+        .page-sub { font-size: 1rem; color: var(--muted); max-width: 500px; margin: 0 auto 2.5rem; line-height: 1.7; position: relative; z-index: 2; }
+
+        /* ─── MAIN CONTENT ─── */
+        .main-wrap { max-width: 1000px; margin: 0 auto; padding: 2rem 5vw 5rem; }
+        
+        .exam-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .exam-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 2rem; position: relative; overflow: hidden; }
+        .exam-card::after { content: ''; position: absolute; top:0; left:0; width:100%; height:4px; background: var(--exam-color); }
+        .exam-title { font-family: 'Space Mono', monospace; font-size: 1.5rem; font-weight: 700; color: var(--heading); margin-bottom: 0.5rem; }
+        .exam-sub { font-size: 0.9rem; color: var(--muted); margin-bottom: 1.5rem; }
+        
+        .exam-info { margin-bottom: 1rem; font-size: 0.85rem;}
+        .exam-info strong { color: var(--heading); font-family: 'Space Mono', monospace;}
+        
+        .exam-btn { display: inline-block; background: transparent; color: var(--heading); text-decoration: none; border: 1px solid var(--border); padding: 0.5rem 1rem; border-radius: 6px; font-family: 'Space Mono', monospace; font-size: 0.8rem; margin-top: 1rem; transition: background 0.2s; }
+        .exam-btn:hover { background: rgba(255,255,255,0.05); }
+
+        @media(max-width: 768px) { .nav-center { display: none; } }
+    </style>
+    <script>
+        // Persistent Theme Logic
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            }
+        })();
+    </script>
+</head>
+
+<body>
+    <!-- NAV -->
+    <nav>
+        <a href="home.html" class="nav-logo" style="text-decoration:none">Career<span>Compass</span></a>
+        <ul class="nav-center">
+            <li><a href="home.html#features">Features</a></li>
+            <li><a href="careerpath.html">Career Paths</a></li>
+            <li><a href="home.html#how">How It Works</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="placement.html">Placement</a></li>
+        </ul>
+        <div class="nav-right">
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                <div class="toggle-knob" id="toggle-knob">☀️</div>
+            </button>
+            <a href="careerpath.html" class="nav-cta" style="text-decoration:none">Get Started →</a>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <div class="page-header">
+        <div class="page-label">Masters & Beyond</div>
+        <h1 class="page-title">Higher <span style="color:#a855f7">Studies</span></h1>
+        <p class="page-sub">Explore options like M.Tech, MS abroad, or MBA. Know about the entrance exams required.</p>
+    </div>
+
+    <!-- MAIN -->
+    <div class="main-wrap">
+        <div class="exam-grid">
+            
+            <div class="exam-card" style="--exam-color: #3d7fff">
+                <div class="exam-title">GATE</div>
+                <div class="exam-sub">Graduate Aptitude Test in Engineering</div>
+                <div class="exam-info"><strong>Purpose:</strong> M.Tech at IITs/NITs, Direct PSU Jobs</div>
+                <div class="exam-info"><strong>Timeline:</strong> Target 3rd/4th year Feb exam</div>
+                <p style="color:var(--muted); font-size:0.85rem; line-height:1.5;">The most important exam for core engineering students aiming for top-tier master's degrees in India or direct government jobs.</p>
+                <a href="#" class="exam-btn">View Prep Strategy</a>
+            </div>
+
+            <div class="exam-card" style="--exam-color: #00e5b0">
+                <div class="exam-title">GRE & TOEFL/IELTS</div>
+                <div class="exam-sub">For MS Abroad (USA, Europe, Canada)</div>
+                <div class="exam-info"><strong>Purpose:</strong> Masters / PhD abroad</div>
+                <div class="exam-info"><strong>Timeline:</strong> Write exams in late 3rd Year</div>
+                <p style="color:var(--muted); font-size:0.85rem; line-height:1.5;">Required for admissions into international universities. Focus on building a strong research profile and SOP along with good scores.</p>
+                <a href="#" class="exam-btn">View MS Guide</a>
+            </div>
+
+            <div class="exam-card" style="--exam-color: #ff6b35">
+                <div class="exam-title">CAT / GMAT</div>
+                <div class="exam-sub">For MBA degrees</div>
+                <div class="exam-info"><strong>Purpose:</strong> Management degrees at IIMs / Top B-Schools</div>
+                <div class="exam-info"><strong>Timeline:</strong> Give CAT in 4th Year Nov</div>
+                <p style="color:var(--muted); font-size:0.85rem; line-height:1.5;">Ideal for engineers looking to pivot into management, product management, or consulting immediately after B.Tech.</p>
+                <a href="#" class="exam-btn">View MBA Guide</a>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const knob = document.getElementById('toggle-knob');
+            if (html.getAttribute('data-theme') === 'dark') {
+                html.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+                if(knob) knob.textContent = '🌙';
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                if(knob) knob.textContent = '☀️';
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const knob = document.getElementById('toggle-knob');
+            const theme = document.documentElement.getAttribute('data-theme');
+            if (knob) knob.textContent = theme === 'dark' ? '☀️' : '🌙';
+        });
+    </script>
+</body>
+</html>
